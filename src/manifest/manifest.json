@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.6/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.6",
+  "id": "23211beb-2bb3-49a3-a643-ca6324416d19",
+  "version": "{{VERSION}}",
+  "packageName": "{{PACKAGE_NAME}}",
+  "developer": {
+    "name": "mTerms",
+    "websiteUrl": "https://{{HOSTNAME}}",
+    "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
+    "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
+  },
+  "name": {
+    "short": "Teams Chatbot - NTNU",
+    "full": "Teams Chatbot - NTNU"
+  },
+  "description": {
+    "short": "TODO: add short description here",
+    "full": "TODO: add full description here"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [],
+  "staticTabs": [],
+  "bots": [],
+  "connectors": [],
+  "composeExtensions": [
+    {
+      "botId": "23211beb-2bb3-49a3-a643-ca6324416d19",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "gleifSearch",
+          "type": "query",
+          "title": "Find company",
+          "description": "Search for a company",
+          "context": [
+            "compose"
+          ],
+          "parameters": [{
+            "name": "searchQuery",
+            "description": "Search by name to get suggestions",
+            "title": "Company"
+          }]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{HOSTNAME}}"
+  ],
+  "showLoadingIndicator": true
+}
