@@ -47,12 +47,9 @@ export class GleifAPIBot extends TeamsActivityHandler {
       })
       .then((results) => results.json())
       .then(async (data) => {
-        console.log('wat');
         const searchResultsCards = this.getCompanyResultCards(data.data);
 
-
         setTimeout(() => {
-          console.log('sesarch: ', searchResultsCards)
           resolve({
             composeExtension: {
               type: "result",
@@ -61,8 +58,6 @@ export class GleifAPIBot extends TeamsActivityHandler {
             }
           });
         }, 1000)
-
-        
       })
       .catch((error) => reject("Error getting gleif companies: " + error))
     });
@@ -81,7 +76,17 @@ export class GleifAPIBot extends TeamsActivityHandler {
         })
         .then((result) => result.json())
         .then(({ data }) => {
-          cards.push(CardFactory.heroCard(company.attributes.value, data.id));
+          const entity: any = data.attributes.entity;
+          const companyInformation: string = "<div>"
+            + entity.legalName.name + "<br>"
+            + entity.jurisdiction + "-" + entity.registeredAs
+            + " / LEI: " + data.attributes.lei + "<br><br>"
+            + entity.legalForm.other + "(" + entity.jurisdiction + ")<br><br>"
+            + entity.legalAddress.addressLines[0] + "<br>"
+            + entity.legalAddress.postalCode + " " + entity.legalAddress.city + "<br>"
+            + entity.legalAddress.country
+            + "</div>";
+          cards.push(CardFactory.heroCard(company.attributes.value, companyInformation));
         })
         .catch((error) => cards.push(CardFactory.heroCard("Error getting lei-records: " + error)));
       }
