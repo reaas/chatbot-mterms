@@ -1,0 +1,498 @@
+[
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2005-06-23",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2006-06-23",
+    "InterestRate": "3,75",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2007-06-23",
+    "InterestRate": "3,75",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2008-06-23",
+    "InterestRate": "3,75",
+    "DaysInPeriod": 366
+  },
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2009-06-23",
+    "InterestRate": "3,75",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273360",
+    "Instrument": "ENTRA EIENDOM AS 05/10 3,75%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2010-06-23",
+    "InterestRate": "3,75",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2005-06-23",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2006-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 364
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2007-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2008-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 366
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2009-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2010-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2011-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010273386",
+    "Instrument": "ENTRA EIENDOM AS 05/12 4,10%",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2012-06-22",
+    "InterestRate": "4,1",
+    "DaysInPeriod": 366
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2005-06-23",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2005-09-23",
+    "InterestRate": "2,42",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2005-12-23",
+    "InterestRate": "2,62",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2006-03-23",
+    "InterestRate": "2,79",
+    "DaysInPeriod": 90
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2006-06-23",
+    "InterestRate": "2,98",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2006-09-25",
+    "InterestRate": "3,25",
+    "DaysInPeriod": 94
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2006-12-27",
+    "InterestRate": "3,72",
+    "DaysInPeriod": 93
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2007-03-23",
+    "InterestRate": "4,14",
+    "DaysInPeriod": 86
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2007-06-25",
+    "InterestRate": "4,7",
+    "DaysInPeriod": 94
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2007-09-24",
+    "InterestRate": "5,03",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2007-12-24",
+    "InterestRate": "5,03",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2008-03-25",
+    "InterestRate": "6,18",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2008-06-23",
+    "InterestRate": "6,41",
+    "DaysInPeriod": 90
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2008-09-23",
+    "InterestRate": "6,61",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2008-12-23",
+    "InterestRate": "7,25",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2009-03-23",
+    "InterestRate": "4,13",
+    "DaysInPeriod": 90
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2009-06-23",
+    "InterestRate": "3,57",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2009-09-23",
+    "InterestRate": "2,22",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2009-12-23",
+    "InterestRate": "2,14",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-03-23",
+    "InterestRate": "2,36",
+    "DaysInPeriod": 90
+  },
+  {
+    "ISIN": "NO0010273378",
+    "Instrument": "ENTRA EIENDOM AS 05/10 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-06-23",
+    "InterestRate": "2,55",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010489495",
+    "Instrument": "ENTRA EIENDOM AS 3,90% CD 365",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2009-01-27",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010489495",
+    "Instrument": "ENTRA EIENDOM AS 3,90% CD 365",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2010-01-27",
+    "InterestRate": "3,9",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010548100",
+    "Instrument": "ENTRA EIENDOM AS 3,10% CERT 35",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2009-10-19",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010548100",
+    "Instrument": "ENTRA EIENDOM AS 3,10% CERT 35",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2010-10-11",
+    "InterestRate": "3,1",
+    "DaysInPeriod": 357
+  },
+  {
+    "ISIN": "NO0010552326",
+    "Instrument": "ENTRA EIENDOM AS 3,10% CERT 36",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2009-11-10",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010552326",
+    "Instrument": "ENTRA EIENDOM AS 3,10% CERT 36",
+    "AccruedDayCountConvention": "Act/365",
+    "TermDate": "2010-11-10",
+    "InterestRate": "3,1",
+    "DaysInPeriod": 365
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2009-11-25",
+    "InterestRate": 0,
+    "DaysInPeriod": 0
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-02-25",
+    "InterestRate": "2,85",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-05-25",
+    "InterestRate": "3,11",
+    "DaysInPeriod": 89
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-08-25",
+    "InterestRate": "3,35",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2010-11-25",
+    "InterestRate": "3,46",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2011-02-25",
+    "InterestRate": "3,29",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2011-05-25",
+    "InterestRate": "3,45",
+    "DaysInPeriod": 89
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2011-08-25",
+    "InterestRate": "3,49",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2011-11-25",
+    "InterestRate": "3,93",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2012-02-27",
+    "InterestRate": "4,07",
+    "DaysInPeriod": 94
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2012-05-25",
+    "InterestRate": "3,46",
+    "DaysInPeriod": 88
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2012-08-27",
+    "InterestRate": "3,12",
+    "DaysInPeriod": 94
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2012-11-26",
+    "InterestRate": "2,84",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2013-02-25",
+    "InterestRate": "2,76",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2013-05-27",
+    "InterestRate": "2,67",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2013-08-26",
+    "InterestRate": "2,55",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2013-11-25",
+    "InterestRate": "2,52",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2014-02-25",
+    "InterestRate": "2,44",
+    "DaysInPeriod": 92
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2014-05-26",
+    "InterestRate": "2,49",
+    "DaysInPeriod": 90
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2014-08-25",
+    "InterestRate": "2,63",
+    "DaysInPeriod": 91
+  },
+  {
+    "ISIN": "NO0010552441",
+    "Instrument": "ENTRA EIENDOM AS 09/14 FRN",
+    "AccruedDayCountConvention": "Act/360",
+    "TermDate": "2014-11-25",
+    "InterestRate": "2,53",
+    "DaysInPeriod": 92
+  }
+]
