@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.6/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.6",
+  "id": "23211beb-2bb3-49a3-a643-ca6324416d19",
+  "version": "0.0.1",
+  "packageName": "{{PACKAGE_NAME}}",
+  "developer": {
+    "name": "mTerms",
+    "websiteUrl": "https://{{HOSTNAME}}",
+    "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
+    "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
+  },
+  "name": {
+    "short": "Chatbot mTerms - NTNU",
+    "full": "Chatbot mTerms - NTNU"
+  },
+  "description": {
+    "short": "mTerms/NTNU chatbot",
+    "full": "TDT4290 - Customer driven project made for mTerms by NTNU"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [],
+  "staticTabs": [],
+  "bots": [{
+    "botId": "23211beb-2bb3-49a3-a643-ca6324416d19",
+    "needsChannelSelector": false,
+    "isNotificationOnly": false,
+    "scopes": ["personal"],
+    "supportsFiles": false,
+    "commandLists": [{
+      "scopes": ["personal"],
+      "commands": [{
+        "title": "Command 1",
+        "description": "Command 1 description"
+      }, {
+        "title": "Command 2",
+        "description": "Command 2 description"
+      }]
+    }]
+  }],
+  "connectors": [],
+  "composeExtensions": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{HOSTNAME}}"
+  ],
+  "showLoadingIndicator": true
+}
