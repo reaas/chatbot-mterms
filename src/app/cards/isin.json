@@ -1,0 +1,32 @@
+{
+  "$schema": "https://adaptivecards.io/schemas/1.1.0/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "id": "instument",
+      "type": "TextBlock",
+      "size": "large",
+      "text": ""
+    }, {
+      "id": "isin",
+      "type": "TextBlock",
+      "text": ""
+    }, {
+      "id": "act",
+      "type": "TextBlock",
+      "text": ""
+    }, {
+      "id": "termdate",
+      "type": "TextBlock",
+      "text": ""
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Click me!",
+      "data": "yoyo"
+    }
+  ]
+}
