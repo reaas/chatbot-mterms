@@ -1,8 +1,5 @@
 # Chatbot mTerms - NTNU - Microsoft Teams App
 
-Generate a Microsoft Teams application.
-
-TODO: Add your documentation here
 ## Configuration
 
 Configuration is stored in the `.env` file.
