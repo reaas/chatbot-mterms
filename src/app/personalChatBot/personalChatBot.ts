@@ -28,6 +28,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
         ["M", Math.pow(10, 9)],
       ]);
 
+      //Converts numbers with prefix to normal numbers
       if (containsNumber) {
         const numb = messageSplit.find((i) => regexpContainsNumber.test(i));
         const isLastCharLetter = new RegExp("[A-Za-z]$");
