@@ -2,6 +2,7 @@ import { CardFactory, TeamsActivityHandler } from "botbuilder";
 import * as debug from "debug";
 import * as AdaptiveCards from "adaptivecards";
 import { DBClient } from "../TeamsAppsComponents";
+import * as moment from 'moment';
 const log = debug("msteams");
 
 export class PersonalChatBot extends TeamsActivityHandler {
@@ -17,19 +18,37 @@ export class PersonalChatBot extends TeamsActivityHandler {
     this.onMessage(async (context, next) => {
       await this.dbClient.connect();
 
-      const regexp = new RegExp('[A-Z]{2}([A-Z0-9]){9}[0-9]');
+      const regexpIsin = new RegExp('[A-Z]{2}([A-Z0-9]){9}[0-9]');
       const messageSplit: string[] = context.activity.text.split(" ");
-      const isIsin = regexp.test(context.activity.text);
+      const isIsin = regexpIsin.test(context.activity.text);
+		
+			const monthSubstitutions = { 'jan' : '01', 'uary' : '', 'uar':'' };
+			var dateText = context.activity.text.replace(/-/g, '/').replace(/:/g, '/').replace(/\./g, '/').replace(/ /g, '/');
+			for (var i = 0; i < dateText.length; ++i) {
+				for (var pattern_length = 2; pattern_length < 9 && i + pattern_length < dateText.length; ++pattern_length) { 
+					if (dateText.substring(i, i + pattern_length).toLowerCase() in monthSubstitutions) {
+						dateText = dateText.substring(0, i) + monthSubstitutions[dateText.substring(i, i + pattern_length).toLowerCase()] + dateText.substr(i + pattern_length);
+					}
+				}
+			}
+			dateText = dateText.replace(/[a-z]{0, 9}/gi, m => monthSubstitutions[m]);
+			
+			const date = this.parseDate(dateText);
 
       if (isIsin) {
-        const isin = messageSplit.find((i) => regexp.test(i));
+        const isin = messageSplit.find((i) => regexpIsin.test(i));
         const textMessage = await this.getDocumentByISIN(isin);
         
         await context.sendActivity({ text: textMessage, attachments: [CardFactory.adaptiveCard(this.isinCard)] });
         this.history.push(context.activity.text);
         await next();
-      } else {
-        await context.sendActivity({ text: "Enter a ISIN number" });
+      } else if (date != null) {
+        await context.sendActivity({ text: "Date on standard format: " + dateText });
+        this.history.push(context.activity.text);
+        await next()
+		  } else {
+				await context.sendActivity({ text: dateText });
+        // await context.sendActivity({ text: "Enter a ISIN number" });
         this.history.push(context.activity.text);
         await next()
       }
@@ -40,6 +59,16 @@ export class PersonalChatBot extends TeamsActivityHandler {
       console.log('action: ', action);
     }
   }
+
+	parseDate(str) {
+		function pad(x){return (((''+x).length==2) ? '' : '0') + x; }
+		var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+			, d = (m) ? new Date(m[3], m[2]-1, m[1]) : null
+			, matchesPadded = (d&&(str==[pad(d.getDate()),pad(d.getMonth()+1),d.getFullYear()].join('/')))
+			, matchesNonPadded = (d&&(str==[d.getDate(),d.getMonth()+1,d.getFullYear()].join('/')));
+		return (matchesPadded || matchesNonPadded) ? d : null;
+	}
+
 
   async getDocumentByISIN(_isin: string | undefined) {
     if (_isin === undefined) return "No isin found";
