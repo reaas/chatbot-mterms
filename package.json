@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@microsoft/teams-js": "1.6.0",
+    "adaptivecards": "^2.3.0",
     "axios": "^0.19.2",
     "botbuilder": "4.7.1",
     "botbuilder-dialogs": "4.7.1",
@@ -18,6 +19,7 @@
     "express": "4.16.4",
     "express-msteams-host": "1.6.2",
     "express-session": "1.15.6",
+    "mongodb": "^3.6.2",
     "morgan": "1.9.1"
   },
   "devDependencies": {
