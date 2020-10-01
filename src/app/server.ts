@@ -81,6 +81,7 @@ const botAdapter = new BotFrameworkAdapter({
 // configure what happens when there is an unhandled error by the bot
 botAdapter.onTurnError = async (context, error) => {
     console.error(`\n [bot.onTurnError] unhandled error: ${error}`);
+    console.trace();
     await context.sendTraceActivity("OnTurnError Trace", `${error}`, "https://www.botframework.com/schemas/error", "TurnError");
     await context.sendActivity("bot error");
 };
