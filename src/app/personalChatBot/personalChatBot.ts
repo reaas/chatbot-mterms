@@ -33,20 +33,52 @@ export class PersonalChatBot extends TeamsActivityHandler {
           ["k", Math.pow(10, 3)],
           ["m", Math.pow(10, 6)],
           ["M", Math.pow(10, 9)],
+          ["b", Math.pow(10, 12)],
+          ["thousand", Math.pow(10, 3)],
+          ["million", Math.pow(10, 6)],
+          ["mill", Math.pow(10, 6)],
+          ["millions", Math.pow(10, 6)],
+          ["billion", Math.pow(10, 9)],
+          ["billions", Math.pow(10, 9)],
+          ["trillion", Math.pow(10, 12)],
+          ["trillions", Math.pow(10, 12)],
         ]);
-
+        //with space
+        //if (isNumberSpaceName) {
+        //for word in messageSplit
+        //}
         //Converts numbers with prefix to normal numbers
         if (containsNumber) {
           const numb = messageSplit.find((i) => regexpContainsNumber.test(i));
           const isLastCharLetter = new RegExp("[A-Za-z]$");
-
+          const isLast4CharLetters = new RegExp("[A-Za-z]{4}");
+          const isLast7CharLetters = new RegExp("[A-Za-z]{7}");
+          const isLast8CharLetters = new RegExp("[A-Za-z]{8}");
+          const isLast9CharLetters = new RegExp("[A-Za-z]{9}");
+          // use to match with space https://www.regexpal.com/98102 ??
+          //var input = "bobs nice house";
+          //var afterSpace = Regex.Match(input, "[^ ]* (.*)").Groups[1].Value;
+          //gives nice house
           if (numb) {
-            if (isLastCharLetter.test(numb)) {
-              const prefix = prefixes.get(numb[numb.length - 1]);
-              if (prefix) {
-                let price = Number(prefix) * Number(numb.slice(0, -1));
-                await context.sendActivity({ text: String(price) });
-              }
+            let numberOfLettersInNumb = -1;
+            if (isLast9CharLetters.test(numb)) {
+              numberOfLettersInNumb = -9;
+            } else if (isLast8CharLetters.test(numb)) {
+              numberOfLettersInNumb = -8;
+            } else if (isLast7CharLetters.test(numb)) {
+              numberOfLettersInNumb = -7;
+            } else if (isLast4CharLetters.test(numb)) {
+              numberOfLettersInNumb = -4;
+            } else if (isLastCharLetter.test(numb)) {
+              numberOfLettersInNumb = -1;
+            }
+            const prefix = prefixes.get(
+              numb.slice(numberOfLettersInNumb, numb.length).toLowerCase()
+            );
+            if (prefix) {
+              let price =
+                Number(prefix) * Number(numb.slice(0, numberOfLettersInNumb));
+              await context.sendActivity({ text: String(price) });
             } else {
               await context.sendActivity({ text: String(numb) });
             }
