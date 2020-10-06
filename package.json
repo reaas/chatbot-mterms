@@ -5,12 +5,18 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "gulp build",
-    "debug": "gulp serve --debug"
+    "debug": "gulp serve --debug",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
     "@microsoft/teams-js": "1.6.0",
+    "@types/jest": "^26.0.14",
     "adaptivecards": "^2.3.0",
     "axios": "^0.19.2",
+    "babel-jest": "^26.3.0",
     "botbuilder": "4.7.1",
     "botbuilder-dialogs": "4.7.1",
     "compression": "1.7.4",
@@ -32,6 +38,7 @@
     "del": "^5.1.0",
     "dotenv-webpack": "^1.7.0",
     "fancy-log": "1.3.2",
+    "gulp": "4.0.2",
     "gulp-if": "^2.0.2",
     "gulp-inject": "5.0.2",
     "gulp-load-plugins": "^1.6.0",
@@ -41,20 +48,20 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-token-replace": "1.1.5",
     "gulp-zip": "4.2.0",
-    "gulp": "4.0.2",
-    "ngrok": "^3.1.1",
+    "jest": "^26.4.2",
+    "ngrok": "^3.3.0",
     "nodemon": "1.19.0",
     "plugin-error": "1.0.1",
     "plumber": "^0.4.8",
     "ts-loader": "7.0.1",
-    "tslint-webpack-plugin": "^1.2.2",
     "tslint": "^5.11.0",
+    "tslint-loader": "^3.6.0",
+    "tslint-webpack-plugin": "^1.2.2",
     "typescript": "3.3.4000",
     "vinyl": "2.2.0",
     "webpack": "4.26.0",
     "yargs": "15.3.1",
-    "z-schema": "^4.2.2",
-    "tslint-loader": "^3.6.0"
+    "z-schema": "^4.2.2"
   },
   "browserslist": [
     "> 1%",
