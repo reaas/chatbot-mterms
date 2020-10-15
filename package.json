@@ -20,7 +20,8 @@
     "express-msteams-host": "1.6.2",
     "express-session": "1.15.6",
     "mongodb": "^3.6.2",
-    "morgan": "1.9.1"
+    "morgan": "1.9.1",
+    "restify": "^8.5.1"
   },
   "devDependencies": {
     "@types/debug": "4.1.2",
