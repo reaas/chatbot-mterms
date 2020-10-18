@@ -3,8 +3,11 @@ import { AdaptiveCard, TextBlock } from "adaptivecards";
 export class ISINCard extends AdaptiveCard {
   instrument: TextBlock;
   isin: TextBlock;
-  act: TextBlock;
-  termDate: TextBlock;
+  issueDate: TextBlock;
+  maturityDate: TextBlock;
+  rateDetails: TextBlock;
+  type: TextBlock;
+  figi: TextBlock;
 
   constructor() {
     super();
@@ -15,18 +18,29 @@ export class ISINCard extends AdaptiveCard {
     this.isin = new TextBlock();
     this.isin.id = "_isin";
 
-    this.act = new TextBlock();
-    this.act.id = "_act";
+    this.issueDate = new TextBlock();
+    this.issueDate.id = "_issueDate";
 
-    this.termDate = new TextBlock();
-    this.termDate.id = "_termDate";
+    this.maturityDate = new TextBlock();
+    this.maturityDate.id = "_maturityDate";
 
+    this.rateDetails = new TextBlock();
+    this.rateDetails.id = "_rateDetails";
+
+    this.type = new TextBlock();
+    this.type.id = "_type";
+
+    this.figi = new TextBlock();
+    this.figi.id = "_figi";
 
     const textBlocks: TextBlock[] = [
       this.instrument,
       this.isin,
-      this.act,
-      this.termDate
+      this.issueDate,
+      this.maturityDate,
+      this.rateDetails,
+      this.type,
+      this.figi
     ];
 
     textBlocks.forEach((block) => this.addItem(block));

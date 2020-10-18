@@ -29,7 +29,7 @@
     "botId": "cc18f933-0bb2-4ef7-a5a0-438f84e93ecd",
     "needsChannelSelector": false,
     "isNotificationOnly": false,
-    "scopes": ["personal"],
+    "scopes": ["personal", "team"],
     "supportsFiles": false,
     "commandLists": [{
       "scopes": ["personal"],
