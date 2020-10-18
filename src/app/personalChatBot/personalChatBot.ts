@@ -204,16 +204,4 @@ export class PersonalChatBot extends TeamsActivityHandler {
   private isFormMessage(message: string): boolean {
     return new RegExp('^(.*form).*').test(message);
   }
-
-  async getDocumentByISIN(_isin: string | undefined) {
-    if (_isin === undefined) return "No isin found";
-    
-    const result = await this.dbClient.getDocumentByISIN(_isin);
-
-    
-
-    const textMessage: string = "Here is the information about: " + result.ISIN;
-
-    return textMessage;
-  }
 }
