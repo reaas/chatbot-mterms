@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1601822205948" clover="3.2.0">
-  <project timestamp="1601822205948" name="All files">
+<coverage generated="1602139629910" clover="3.2.0">
+  <project timestamp="1602139629910" name="All files">
     <metrics statements="49" coveredstatements="49" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8" elements="57" coveredelements="57" complexity="0" loc="49" ncloc="49" packages="3" files="3" classes="3"/>
     <package name="cards">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="isinCard.ts" path="C:\Users\Utlån\Desktop\Skole\chatbot\chatbot-mterms\src\app\cards\isinCard.ts">
+      <file name="isinCard.ts" path="C:\Users\alex_\OneDrive\Desktop\Skole\KPRO\chatbot-mterms\src\app\cards\isinCard.ts">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
@@ -21,7 +21,7 @@
     </package>
     <package name="dataAccess">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="dbClient.ts" path="C:\Users\Utlån\Desktop\Skole\chatbot\chatbot-mterms\src\app\dataAccess\dbClient.ts">
+      <file name="dbClient.ts" path="C:\Users\alex_\OneDrive\Desktop\Skole\KPRO\chatbot-mterms\src\app\dataAccess\dbClient.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -35,7 +35,7 @@
     </package>
     <package name="forms">
       <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="buyForm.ts" path="C:\Users\Utlån\Desktop\Skole\chatbot\chatbot-mterms\src\app\forms\buyForm.ts">
+      <file name="buyForm.ts" path="C:\Users\alex_\OneDrive\Desktop\Skole\KPRO\chatbot-mterms\src\app\forms\buyForm.ts">
         <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="11" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
