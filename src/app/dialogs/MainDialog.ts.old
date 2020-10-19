@@ -1,4 +1,4 @@
-import { StatePropertyAccessor, TurnContext } from "botbuilder";
+import { StatePropertyAccessor, TurnContext } from 'botbuilder';
 import {
     ComponentDialog,
     DialogSet,
@@ -8,14 +8,14 @@ import {
     OAuthPrompt,
     WaterfallDialog,
     WaterfallStepContext
-} from "botbuilder-dialogs";
+} from 'botbuilder-dialogs';
 
-import { SiteDetails } from "./siteDetails";
-import { SiteDialog } from "./siteDialog";
+import { SiteDetails } from './siteDetails';
+import { SiteDialog } from './siteDialog';
 
-const SITE_DIALOG = "siteDialog";
-const MAIN_WATERFALL_DIALOG = "waterfallDialog";
-const OAUTH_PROMPT = "OAuthPrompt";
+const SITE_DIALOG = 'siteDialog';
+const MAIN_WATERFALL_DIALOG = 'waterfallDialog';
+const OAUTH_PROMPT = 'OAuthPrompt';
 
 export class MainDialog extends ComponentDialog {
     
@@ -23,17 +23,18 @@ export class MainDialog extends ComponentDialog {
         super(id);
 
         this.addDialog(new SiteDialog(SITE_DIALOG))
-            .addDialog(new OAuthPrompt(OAUTH_PROMPT, {
-                connectionName: process.env.connectionName!,
-                text: "Please Sign In",
-                timeout: 300000,
-                title: "Sign In"
-            }))
             .addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
                 this.promptStep.bind(this),
                 this.initialStep.bind(this),
                 this.finalStep.bind(this)
-            ]));
+            ]))
+            .addDialog(new OAuthPrompt(OAUTH_PROMPT, {
+                connectionName: 'GraphConnection',
+                text: 'Please Sign In',
+                timeout: 300000,
+                title: 'Sign In'
+            }));
+
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
     }
 
@@ -43,11 +44,11 @@ export class MainDialog extends ComponentDialog {
      * @param {TurnContext} context
      */
     public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>) {
-        const dialogSet = new DialogSet(accessor)!;
+        const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
 
-        const dialogContext = await dialogSet!.createContext(context);
-        const results = await dialogContext.continueDialog()!;
+        const dialogContext = await dialogSet.createContext(context);
+        const results = await dialogContext.continueDialog();
         if (results.status === DialogTurnStatus.empty) {
             await dialogContext.beginDialog(this.id);
         }
@@ -66,12 +67,12 @@ export class MainDialog extends ComponentDialog {
     private async initialStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
-            await stepContext.context.sendActivity("You are now logged in.");
+            await stepContext.context.sendActivity('You are now logged in.');
             
             const siteDetails = new SiteDetails();
             return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
         }
-        await stepContext.context.sendActivity("Login was not successful please try again.");
+        await stepContext.context.sendActivity('Login was not successful please try again.');
         return await stepContext.endDialog();  
     }
 

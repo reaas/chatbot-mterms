@@ -6,15 +6,13 @@ import {
     TextPrompt,
     WaterfallDialog,
     WaterfallStepContext
-} from "botbuilder-dialogs";
+} from 'botbuilder-dialogs';
 
-import { AliasResolverDialog } from "./aliasResolverDialog";
-import { HelperDialog } from "./helperDialog";
-import { OwnerResolverDialog } from "./ownerResolverDialog";
-import { SiteDetails } from "./siteDetails";
+import { HelperDialog } from './helperDialog';
+import { OwnerResolverDialog } from './ownerResolverDialog';
+import { SiteDetails } from './siteDetails';
 
-const ALIAS_RESOLVER_DIALOG = "aliasResolverDialog";
-const TEXT_PROMPT = "textPrompt";
+const TEXT_PROMPT = 'textPrompt';
 const CHOICE_PROMPT = 'choicePrompt';
 const OWNER_RESOLVER_DIALOG = 'ownerResolverDialog';
 const CONFIRM_PROMPT = 'confirmPrompt';
@@ -22,9 +20,8 @@ const WATERFALL_DIALOG = 'waterfallDialog';
 
 export class SiteDialog extends HelperDialog {
     constructor(id: string) {
-        super(id || "siteDialog", process.env.connectionName!);
+        super(id || 'siteDialog', 'GraphConnection');
         this
-            .addDialog(new AliasResolverDialog(ALIAS_RESOLVER_DIALOG))
             .addDialog(new ChoicePrompt(CHOICE_PROMPT))
             .addDialog(new TextPrompt(TEXT_PROMPT))
             .addDialog(new OwnerResolverDialog(OWNER_RESOLVER_DIALOG))
@@ -126,7 +123,8 @@ export class SiteDialog extends HelperDialog {
         } else {
             
             if (!siteDetails.alias) {
-                return await stepContext.beginDialog(ALIAS_RESOLVER_DIALOG, { siteDetails });
+                const text = 'Provide an alias for your site';
+                return await stepContext.prompt(TEXT_PROMPT, { prompt: text }); 
             } else {
                 return await stepContext.next(siteDetails.alias);
             }
