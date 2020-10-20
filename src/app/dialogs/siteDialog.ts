@@ -8,10 +8,12 @@ import {
     WaterfallStepContext
 } from 'botbuilder-dialogs';
 
+import {AliasResolverDialog} from './aliasResolverDialog';
 import { HelperDialog } from './helperDialog';
 import { OwnerResolverDialog } from './ownerResolverDialog';
 import { SiteDetails } from './siteDetails';
 
+const ALIAS_RESOLVER_DIALOG = 'aliasResolverDialog';
 const TEXT_PROMPT = 'textPrompt';
 const CHOICE_PROMPT = 'choicePrompt';
 const OWNER_RESOLVER_DIALOG = 'ownerResolverDialog';
@@ -22,6 +24,7 @@ export class SiteDialog extends HelperDialog {
     constructor(id: string) {
         super(id || 'siteDialog', 'GraphConnection');
         this
+            .addDialog(new AliasResolverDialog(ALIAS_RESOLVER_DIALOG))
             .addDialog(new ChoicePrompt(CHOICE_PROMPT))
             .addDialog(new TextPrompt(TEXT_PROMPT))
             .addDialog(new OwnerResolverDialog(OWNER_RESOLVER_DIALOG))
