@@ -12,7 +12,7 @@ export class GraphHelper {
             throw new Error('GraphHelper.userExists(): `tokenResponse` cannot be undefined.');
         }
         const client = new SimpleGraphClient(tokenResponse.token);
-        await client.getUserID();
+        await client.createTask();
         return await client.userExists(emailAddress);
     }
 
