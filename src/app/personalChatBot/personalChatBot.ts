@@ -53,31 +53,18 @@ export class PersonalChatBot extends TeamsActivityHandler {
     super();
 
     this.onMessage(async (context, next) => {
-      await this.dbClient.connect();
-
       if (context.activity.value) {
         console.log('value: ', context.activity.value);
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
 
         let answer: History[] = [];
-        
+
+        let isinMaybe: string = "";
+
         messageSplit.forEach(async (message, index) => {
           if (this.isISIN(message)) {
-            const isininfo: Instrument = await this.internalAPI.getInstumentById(message);
-
-            this.isinCard.instrument.text = isininfo.name;
-            this.isinCard.isin.text = "ISIN; " + isininfo.isin;
-            this.isinCard.issueDate.text = "Issue data; " + moment(isininfo.issueDate).format('DD.MM.YYYY');
-            this.isinCard.maturityDate.text = "Maturity date: " + moment(isininfo.maturityDate).format('DD.MM.YYYY');
-            this.isinCard.rateDetails.text = "Rate details: " + isininfo.rateDetails;
-            this.isinCard.type.text = "Type: " + isininfo.type;
-            this.isinCard.figi.text = isininfo.figi ? "Figi: " + isininfo.figi : "No FIGI";
-
-            this.history.push({ type: "ISIN", value: this.isinCard.toJSON() });
-
-            await context.sendActivity({ text: "Here is more information about: " + message, attachments: [CardFactory.adaptiveCard(this.isinCard.toJSON())] });
-            await next();
+            isinMaybe = message;
           }
 
           if (message.toLowerCase() === 'price') {
@@ -127,7 +114,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
           if (this.isFormMessage(message)) {
             let formType: string = message.toLowerCase();
             if (message.toLowerCase() === 'form') {
-              formType = messageSplit[index - 1].toLowerCase() + " " + message.toLowerCase();
+              formType = messageSplit[index - 1].toLowerCase() + message.toLowerCase();
             }
 
             const historyForm: History = {
@@ -138,9 +125,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
             switch (formType) {
               case 'buyform':
-                historyForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON());
-                break;
-              case 'buy form':
                 historyForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON());
                 break;
             }
@@ -158,19 +142,43 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 + '3. an ISIN number - returns the internal data of that ISIN'
                 + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000'
             });
-
-            const instruments: Instrument[] = await this.internalAPI.getInstruments();
-
-            console.log('instruments: ', instruments);
           }
         });
+
+        if (isinMaybe.length > 0) {
+          await this.internalAPI.getInstrumentById(isinMaybe).then(async (isininfo) => {
+            this.isinCard.instrument.text = isininfo.name;
+            this.isinCard.isin.text = "ISIN; " + isininfo.isin;
+            this.isinCard.issueDate.text = "Issue data; " + moment(isininfo.issueDate).format('DD.MM.YYYY');
+            this.isinCard.maturityDate.text = "Maturity date: " + moment(isininfo.maturityDate).format('DD.MM.YYYY');
+            this.isinCard.rateDetails.text = "Rate details: " + isininfo.rateDetails;
+            this.isinCard.type.text = "Type: " + isininfo.type;
+            this.isinCard.figi.text = isininfo.figi ? "Figi: " + isininfo.figi : "No FIGI";
+
+            this.history.push({ type: "ISIN", value: this.isinCard.toJSON() });
+
+            const isForm = answer.find(a => a.type === "FORM")
+            
+            if (isForm) {
+              if (isForm.formType === 'buyform') {
+                const isinInput = this.buyForm.textInputs.find(i => i.id === '_isin');
+  
+                if (isinInput) {
+                  isinInput.defaultValue = isinMaybe;
+                }
+  
+                isForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON()); 
+              }
+            }
+
+            await context.sendActivity({ text: "Here is more information about: " + isinMaybe, attachments: [CardFactory.adaptiveCard(this.isinCard.toJSON())] });
+          });
+        }
 
         let textMessage: string = "";
         const attachments: Attachment[] = [];
 
-
         answer.forEach((toSend) => {
-          console.log('toSend: ', toSend);
           switch (toSend.type) {
             case 'ISIN':
               attachments.push(toSend.value);
@@ -188,7 +196,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
         });
 
         await context.sendActivity({ text: textMessage, attachments: attachments });
-        await next();
       }
     });
   }

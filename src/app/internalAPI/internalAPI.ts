@@ -27,15 +27,29 @@ export class InternalAPI {
     return response.data;
   }
 
-  async getInstumentById(id: string): Promise<Instrument> {
-    const response = await axios({
+  getInstrumentById = (id: string): Promise<Instrument> => new Promise<Instrument>((resolve, reject) => {
+    console.log('2 calling');
+    axios({
       url: this.baseURL + "/Instruments/" + id,
       method: "GET",
       headers: this.headers
+    }).then((response) => {
+      console.log('3 returning');
+      resolve(response.data);
     });
+  });
 
-    return response.data;
-  }
+  /* async getInstumentById(id: string): Promise<Instrument> {
+    console.log('2 calling')
+    axios({
+      url: this.baseURL + "/Instruments/" + id,
+      method: "GET",
+      headers: this.headers
+    }).then((response) => {
+      console.log('3 returning')
+      return response.data;
+    });
+  } */
 
   async getLatestPriceById(id: string): Promise<Price> {
     const response = await axios({

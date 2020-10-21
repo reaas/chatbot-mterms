@@ -1,5 +1,6 @@
 # do not include the node modules in Git
 node_modules
+package-lock.json
 
 # do not include the package in Git
 package

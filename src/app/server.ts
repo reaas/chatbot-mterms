@@ -89,7 +89,7 @@ botAdapter.onTurnError = async (context, error) => {
 // run the bot when messages are received on the specified path
 const bot = new PersonalChatBot();
 express.post("/api/messages", async (request, response) => {
-    await botAdapter.processActivity(request, response, async (context) => {
+    botAdapter.processActivity(request, response, async (context) => {
         await bot.run(context);
     });
 });
