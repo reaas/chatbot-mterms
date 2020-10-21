@@ -35,28 +35,25 @@ export class SimpleGraphClient {
             return false;
         }
     }
-    public async getUserID(): Promise<void> {
+    public async createTask(): Promise<void> {
         let taskID : String = ""
         try {
-            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title":"Bot task w/description 8)","assignments":{}});
-            //console.log("Fungerer", data)
+            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title":"heihei","assignments":{}});
             taskID = data.id
         } catch (error) {
-            console.log("her er feilen", error)
+            console.log("Error creating the task", error)
+            //Sende ut feilmelding i chatten?
         }
 
         try {
             let details = await this.graphClient.api('/planner/tasks/' + taskID + "/details").get()
-            console.log("DETAILS", details)
-            let etag = details["@odata.etag"]
-            console.log("HER", etag)
-            const plannerTaskDetails = {description:"automatic description ;)"};
-            let res = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
-            .header("If-Match", etag)
-            .update(plannerTaskDetails);
-            console.log("HER ER RES", res)
+            //let etag = details["@odata.etag"]
+            let description = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
+            .header("If-Match", details["@odata.etag"])
+            .update({description: "automatic description ;)"});
         } catch (error) {
-            console.log("FEIL:", error)
+            console.log("Error updating the task:", error)
+            //Sende ut feilmelding i chatten?
         }
     } 
 }
