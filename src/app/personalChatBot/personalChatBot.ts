@@ -5,6 +5,7 @@ import { BuyForm } from "../forms/buyForm";
 import { ISINCard } from "../cards/isinCard";
 import { InternalAPI } from "../internalAPI/internalAPI";
 import * as moment from 'moment';
+import { Choice } from "adaptivecards";
 
 interface History {
   type: string;
@@ -51,45 +52,25 @@ export class PersonalChatBot extends TeamsActivityHandler {
     super();
 
     this.onMessage(async (context, next) => {
-      await this.dbClient.connect();
-
       if (context.activity.value) {
         console.log('value: ', context.activity.value);
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
 
         let answer: History[] = [];
-        
+
+        let isinMaybe: string = "";
+        let isinToFind: History = { type: "", value: ""};
+
         messageSplit.forEach(async (message, index) => {
           if (this.isISIN(message)) {
-            const isininfo: Instrument = await this.internalAPI.getInstumentById(message);
-
-            this.isinCard.instrument.text = isininfo.name;
-            this.isinCard.isin.text = "ISIN; " + isininfo.isin;
-            this.isinCard.issueDate.text = "Issue data; " + moment(isininfo.issueDate).format('DD.MM.YYYY');
-            this.isinCard.maturityDate.text = "Maturity date: " + moment(isininfo.maturityDate).format('DD.MM.YYYY');
-            this.isinCard.rateDetails.text = "Rate details: " + isininfo.rateDetails;
-            this.isinCard.type.text = "Type: " + isininfo.type;
-            this.isinCard.figi.text = isininfo.figi ? "Figi: " + isininfo.figi : "No FIGI";
-
-            this.history.push({ type: "ISIN", value: this.isinCard.toJSON() });
-
-            await context.sendActivity({ text: "Here is more information about: " + message, attachments: [CardFactory.adaptiveCard(this.isinCard.toJSON())] });
-            await next();
+            isinMaybe = message;
+            this.history.push({ type: 'ISIN', value: isinMaybe });
           }
 
           if (message.toLowerCase() === 'price') {
-            const isinToFind = this.history.find((ele) => ele.type === 'ISIN');
-
-            if (isinToFind) {
-              await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
-                console.log('price: ', price)
-                this.history.push({ type: "PRICE", value: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-                answer.push({ type: "PRICE", value: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-  
-                await context.sendActivity({ text: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-              }).catch((error) => console.error('error when doing price: ', error));
-            }
+            const temp = this.history.find((ele) => ele.type === 'ISIN');
+            if (temp) isinToFind = temp;
           }
           
           if (this.containsNumber(message)) {
@@ -114,8 +95,10 @@ export class PersonalChatBot extends TeamsActivityHandler {
               const prefix = this.prefixes.get(message.slice(numberOfLettersInNumb, message.length).toLowerCase());
               if (prefix) {
                 let price = Number(prefix) * Number(message.slice(0, numberOfLettersInNumb));
-                this.history.push({ type: "PRICE", value: "Price parsed: " + String(price) + "\n\r" });
-                answer.push({ type: "PRICE", value: "Price parsed: " + String(price) + "\n\r" });
+
+                const his: History = { type: "PRICE", value: `Price parsed: ${String(price)}\n\r` }
+                this.history.push(his);
+                answer.push(his);
               }
             } else {
               console.error("Error parsing " + message + " to a number");
@@ -125,7 +108,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
           if (this.isFormMessage(message)) {
             let formType: string = message.toLowerCase();
             if (message.toLowerCase() === 'form') {
-              formType = messageSplit[index - 1].toLowerCase() + " " + message.toLowerCase();
+              formType = messageSplit[index - 1].toLowerCase() + message.toLowerCase();
             }
 
             const historyForm: History = {
@@ -136,9 +119,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
             switch (formType) {
               case 'buyform':
-                historyForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON());
-                break;
-              case 'buy form':
                 historyForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON());
                 break;
             }
@@ -156,19 +136,47 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 + '3. an ISIN number - returns the internal data of that ISIN'
                 + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000'
             });
-
-            const instruments: Instrument[] = await this.internalAPI.getInstruments();
-
-            console.log('instruments: ', instruments);
           }
         });
+
+        if (isinToFind.type === 'ISIN') {
+          console.log('isintofind: ', isinToFind)
+          await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
+            const his: History = { type: 'PRICE', value: `The last price of ${isinToFind.value} was ${price.value}\r\n` };
+
+            this.history.push(his);
+            answer.push(his);
+          }).catch((error) => console.error('Error when doing price: ', error));
+        }
+
+        if (isinMaybe.length > 0) {
+          await this.internalAPI.getInstrumentById(isinMaybe).then(async (isininfo) => {
+            this.isinCard.instrument.text = isininfo.name;
+            this.isinCard.isin.text = "ISIN; " + isininfo.isin;
+            this.isinCard.issueDate.text = "Issue data; " + moment(isininfo.issueDate).format('DD.MM.YYYY');
+            this.isinCard.maturityDate.text = "Maturity date: " + moment(isininfo.maturityDate).format('DD.MM.YYYY');
+            this.isinCard.rateDetails.text = "Rate details: " + isininfo.rateDetails;
+            this.isinCard.type.text = "Type: " + isininfo.type;
+            this.isinCard.figi.text = isininfo.figi ? "Figi: " + isininfo.figi : "No FIGI";
+
+            this.history.push({ type: "ISIN", value: this.isinCard.toJSON() });
+
+            const isForm = answer.find(a => a.type === "FORM")
+            
+            if (isForm) {
+              if (isForm.formType === 'buyform') {
+                isForm.value = await this.fillBuyForm(isininfo);
+              }
+            }
+
+            await context.sendActivity({ text: "Here is more information about: " + isinMaybe, attachments: [CardFactory.adaptiveCard(this.isinCard.toJSON())] });
+          });
+        }
 
         let textMessage: string = "";
         const attachments: Attachment[] = [];
 
-
         answer.forEach((toSend) => {
-          console.log('toSend: ', toSend);
           switch (toSend.type) {
             case 'ISIN':
               attachments.push(toSend.value);
@@ -202,4 +210,25 @@ export class PersonalChatBot extends TeamsActivityHandler {
   public isFormMessage(message: string): boolean {
     return new RegExp('^(.*form).*').test(message);
   }
+
+  fillBuyForm = (isininfo: Instrument) => new Promise<Attachment>(async (resolve) => {
+    const isinInput = this.buyForm.textInputs.find(i => i.id === '_isin');
+    const issuerInput = this.buyForm.textInputs.find(i => i.id === '_issuer');
+    const issueDateInput = this.buyForm.textInputs.find(i => i.id === '_issueDate');
+    const maturityDateInput = this.buyForm.textInputs.find(i => i.id === '_maturityDate');
+    const rateInput = this.buyForm.textInputs.find(i => i.id === '_rate');
+    const managerInput = this.buyForm.textInputs.find(i => i.id === '_manager');
+    const issuerTypeInput = this.buyForm._issuerType;
+
+    if (isinInput) isinInput.defaultValue = isininfo.isin;
+    if (issuerInput) issuerInput.defaultValue = isininfo.name;
+    if (issueDateInput) issueDateInput.defaultValue = moment(isininfo.issueDate).format('DD.MM.YYYY');
+    if (maturityDateInput) maturityDateInput.defaultValue = moment(isininfo.maturityDate).format('DD.MM.YYYY');
+    if (rateInput) rateInput.defaultValue = isininfo.rateDetails;
+
+    const issuerTypes = await this.internalAPI.getIssuerTypes();
+    if (issuerTypeInput) issuerTypeInput.choices = issuerTypes.map(it => new Choice(it.Value, it.Key));
+
+    resolve(CardFactory.adaptiveCard(this.buyForm.toJSON()));
+  });
 }
