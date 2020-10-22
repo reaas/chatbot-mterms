@@ -62,24 +62,17 @@ export class PersonalChatBot extends TeamsActivityHandler {
         let answer: History[] = [];
 
         let isinMaybe: string = "";
+        let isinToFind: History = { type: "", value: ""};
 
         messageSplit.forEach(async (message, index) => {
           if (this.isISIN(message)) {
             isinMaybe = message;
+            this.history.push({ type: 'ISIN', value: isinMaybe });
           }
 
           if (message.toLowerCase() === 'price') {
-            const isinToFind = this.history.find((ele) => ele.type === 'ISIN');
-
-            if (isinToFind) {
-              await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
-                console.log('price: ', price)
-                this.history.push({ type: "PRICE", value: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-                answer.push({ type: "PRICE", value: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-  
-                await context.sendActivity({ text: "The last price of " + isinToFind.value + " was " + price.value + "\r\n" });
-              }).catch((error) => console.error('error when doing price: ', error));
-            }
+            const temp = this.history.find((ele) => ele.type === 'ISIN');
+            if (temp) isinToFind = temp;
           }
           
           if (this.containsNumber(message)) {
@@ -104,8 +97,10 @@ export class PersonalChatBot extends TeamsActivityHandler {
               const prefix = this.prefixes.get(message.slice(numberOfLettersInNumb, message.length).toLowerCase());
               if (prefix) {
                 let price = Number(prefix) * Number(message.slice(0, numberOfLettersInNumb));
-                this.history.push({ type: "PRICE", value: "Price parsed: " + String(price) + "\n\r" });
-                answer.push({ type: "PRICE", value: "Price parsed: " + String(price) + "\n\r" });
+
+                const his: History = { type: "PRICE", value: `Price parsed: ${String(price)}\n\r` }
+                this.history.push(his);
+                answer.push(his);
               }
             } else {
               console.error("Error parsing " + message + " to a number");
@@ -145,6 +140,16 @@ export class PersonalChatBot extends TeamsActivityHandler {
             });
           }
         });
+
+        if (isinToFind.type === 'ISIN') {
+          console.log('isintofind: ', isinToFind)
+          await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
+            const his: History = { type: 'PRICE', value: `The last price of ${isinToFind.value} was ${price.value}\r\n` };
+
+            this.history.push(his);
+            answer.push(his);
+          }).catch((error) => console.error('Error when doing price: ', error));
+        }
 
         if (isinMaybe.length > 0) {
           await this.internalAPI.getInstrumentById(isinMaybe).then(async (isininfo) => {
