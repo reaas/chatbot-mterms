@@ -98,7 +98,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
               if (prefix) {
                 let price = Number(prefix) * Number(message.slice(0, numberOfLettersInNumb));
 
-                const his: History = { type: "PRICE", value: `Price parsed: ${String(price)}\n\r` }
+                const his: History = { type: "PRICE", value: String(price) }
                 this.history.push(his);
                 answer.push(his);
               }
@@ -144,7 +144,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
         if (isinToFind.type === 'ISIN') {
           console.log('isintofind: ', isinToFind)
           await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
-            const his: History = { type: 'PRICE', value: `The last price of ${isinToFind.value} was ${price.value}\r\n` };
+            const his: History = { type: 'ISINPRICE', value: `The last price of ${isinToFind.value} was ${price.value}\r\n` };
 
             this.history.push(his);
             answer.push(his);
@@ -167,7 +167,15 @@ export class PersonalChatBot extends TeamsActivityHandler {
             
             if (isForm) {
               if (isForm.formType === 'buyform') {
-                isForm.value = await this.fillBuyForm(isininfo);
+                const isPrice = answer.find(a => a.type === "PRICE");
+
+                if (isPrice) {
+                  console.log('price')
+                  isForm.value = await this.fillBuyForm(isininfo, isPrice.value);
+                } else {
+                  console.log('no price')
+                  isForm.value = await this.fillBuyForm(isininfo);                  
+                }
               }
             }
 
@@ -183,7 +191,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
             case 'ISIN':
               attachments.push(toSend.value);
               break;
-            case 'PRICE':
+            case 'ISINPRICE':
               textMessage += toSend.value;
               break;
             case 'FORM':
@@ -213,13 +221,14 @@ export class PersonalChatBot extends TeamsActivityHandler {
     return new RegExp('^(.*form).*').test(message);
   }
 
-  fillBuyForm = (isininfo: Instrument) => new Promise<Attachment>(async (resolve) => {
+  fillBuyForm = (isininfo: Instrument, buyprice?: string) => new Promise<Attachment>(async (resolve) => {
     const isinInput = this.buyForm.textInputs.find(i => i.id === '_isin');
     const issuerInput = this.buyForm.textInputs.find(i => i.id === '_issuer');
     const issueDateInput = this.buyForm.textInputs.find(i => i.id === '_issueDate');
     const maturityDateInput = this.buyForm.textInputs.find(i => i.id === '_maturityDate');
     const rateInput = this.buyForm.textInputs.find(i => i.id === '_rate');
     const managerInput = this.buyForm.textInputs.find(i => i.id === '_manager');
+    const amountInput = this.buyForm.textInputs.find(i => i.id === '_amount');
     const issuerTypeInput = this.buyForm._issuerType;
 
     if (isinInput) isinInput.defaultValue = isininfo.isin;
@@ -227,6 +236,9 @@ export class PersonalChatBot extends TeamsActivityHandler {
     if (issueDateInput) issueDateInput.defaultValue = moment(isininfo.issueDate).format('DD.MM.YYYY');
     if (maturityDateInput) maturityDateInput.defaultValue = moment(isininfo.maturityDate).format('DD.MM.YYYY');
     if (rateInput) rateInput.defaultValue = isininfo.rateDetails;
+
+    console.log('buyprice: ', buyprice)
+    if (buyprice && amountInput) amountInput.defaultValue = buyprice; 
 
     const issuerTypes = await this.internalAPI.getIssuerTypes();
     if (issuerTypeInput) issuerTypeInput.choices = issuerTypes.map(it => new Choice(it.Value, it.Key));
