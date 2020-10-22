@@ -36,18 +36,32 @@ export class SimpleGraphClient {
         }
     }
     public async createTask(): Promise<void> {
-        let taskID : String = ""
+        let taskID : string = ""
+        let userID : string = ""
+        let taskEtag : string = ""
         try {
-            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title":"heihei","assignments":{}});
+            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title":"Task","assignments":{}});
             taskID = data.id
+            userID = data.createdBy.user.id
+            taskEtag = data["@odata.etag"]
+
         } catch (error) {
             console.log("Error creating the task", error)
             //Sende ut feilmelding i chatten?
         }
+        
 
         try {
             let details = await this.graphClient.api('/planner/tasks/' + taskID + "/details").get()
-            //let etag = details["@odata.etag"]
+            const assignee = {
+                "assignments": {
+                    [userID] : {
+                        "@odata.type": "#microsoft.graph.plannerAssignment",
+                        "orderHint": " !"
+                    }
+                }
+            }
+            let assignment = await this.graphClient.api('planner/tasks/' + taskID).header("If-Match", taskEtag).update(assignee)
             let description = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
             .header("If-Match", details["@odata.etag"])
             .update({description: "automatic description ;)"});

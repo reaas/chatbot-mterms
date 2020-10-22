@@ -254,7 +254,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
     // Construct message to send
     const message: Partial<Activity> = {
         entities: [mention],
-        text: `Welcome to Simon Bot ${mention.text}. This Bot is a work in progress. At this time we have some dialogs working. Type anything to get started.`,
+        text: `This Bot is a work in progress. At this time we have some dialogs working. Type anything to get started.`,
         type: ActivityTypes.Message
     };
 
