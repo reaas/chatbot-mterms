@@ -1,4 +1,21 @@
-import { Attachment, CardFactory, TeamsActivityHandler } from "botbuilder";
+import {
+  Activity,
+  ActivityTypes,
+  BotState,
+  ChannelAccount,
+  ConversationState,
+  Mention,
+  SigninStateVerificationQuery,
+  StatePropertyAccessor,
+  TeamsActivityHandler,
+  TurnContext,
+  UserState,
+  Attachment,
+  CardFactory
+} from 'botbuilder';
+import { Dialog, DialogState } from 'botbuilder-dialogs';
+import { MainDialog } from '../dialogs/mainDialog';
+
 import * as debug from "debug";
 import * as AdaptiveCards from "adaptivecards";
 import { DBClient } from "../TeamsAppsComponents";
@@ -15,7 +32,14 @@ interface History {
 }
 
 export class PersonalChatBot extends TeamsActivityHandler {
+  private conversationState: BotState;
+  private userState: BotState;
+  private dialog: Dialog;
+  private dialogState: StatePropertyAccessor<DialogState>;
+
   history: History[] = [];
+
+  inDialog = false;
 
   dbClient = new DBClient();
   internalAPI = new InternalAPI();
@@ -47,19 +71,33 @@ export class PersonalChatBot extends TeamsActivityHandler {
   isLast8CharLetters = new RegExp("[A-Za-z]{8}");
   isLast9CharLetters = new RegExp("[A-Za-z]{9}");
 
-  //***************************//
 
-  constructor() {
+  constructor(conversationState: BotState, userState: BotState, dialog: Dialog) {
     super();
+    this.conversationState = conversationState as ConversationState;
+    this.userState = userState as UserState;
+    this.dialog = dialog;
+    this.dialogState = this.conversationState.createProperty<DialogState>('DialogState');
+
 
     this.onMessage(async (context, next) => {
       if (context.activity.value) {
         console.log('value: ', context.activity.value);
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
-
+        if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase()) {
+            this.inDialog = true;
+            await (this.dialog as MainDialog).run(context, this.dialogState);
+            await next();
+            return;
+        } else if (this.inDialog == true && !(context.activity.text.toUpperCase() == 'Stop'.toUpperCase())) { 
+            console.log("In dialog")
+            await (this.dialog as MainDialog).run(context, this.dialogState);
+            await next();
+            return;
+        }
+ 
         let answer: History[] = [];
-
         let isinMaybe: string = "";
 
         messageSplit.forEach(async (message, index) => {
@@ -139,8 +177,16 @@ export class PersonalChatBot extends TeamsActivityHandler {
               value: 'This bot can do a number of operations. Review the following: \r\n\r\n'
                 + '1. help - returns this message \r\n'
                 + '2. buyform/buy form - returns a buy form \r\n'
-                + '3. an ISIN number - returns the internal data of that ISIN'
-                + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000'
+                + '3. an ISIN number - returns the internal data of that ISIN \r\n'
+                + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000 \r\n'
+                + '5. "Create task" - Starts a dialog which creates a new task. Type "Stop" to stop. \r\n'
+            });
+          }
+          if (message.toLowerCase() == 'stop' && this.inDialog) {
+            this.inDialog = false;
+            answer.push({
+              type: 'STOP',
+              value: 'Create task stopped.\r\n'
             });
           }
         });
@@ -192,12 +238,54 @@ export class PersonalChatBot extends TeamsActivityHandler {
             case 'HELP':
               textMessage += toSend.value + "\r\n";
               break;
+            case 'STOP':
+              textMessage += toSend.value + "\r\n";
+              break;
           }
         });
 
         await context.sendActivity({ text: textMessage, attachments: attachments });
       }
     });
+
+    this.onDialog(async (context, next) => {
+        // Save any state changes. The load happened during the execution of the Dialog.
+        await this.conversationState.saveChanges(context, false);
+        await this.userState.saveChanges(context, false);
+
+        // By calling next() you ensure that the next BotHandler is run.
+        await next();
+    });
+
+    this.onMembersAdded(async (context, next) => {
+      const membersAdded = context.activity.membersAdded!;
+      for (const member of membersAdded) {
+        if (member.id !== context.activity.recipient.id) {
+          // If we are in Microsoft Teams
+          if (context.activity.channelId === 'msteams') {
+            // Send a message with an @Mention
+            await this._messageWithMention(context, member);
+          } else {
+            // Otherwise we send a normal echo
+            await context.sendActivity(`Welcome!`);
+          }
+        }
+      }
+      // By calling next() you ensure that the next BotHandler is run.
+      await next();
+    });
+
+
+    this.onTokenResponseEvent(async (context, next) => {
+      console.log('Running dialog with Token Response Event Activity.');
+
+      // Run the Dialog with the new Token Response Event Activity.
+      await (this.dialog as MainDialog).run(context, this.dialogState);
+
+      // By calling next() you ensure that the next BotHandler is run.
+      await next();
+  });
+
   }
 
   private isISIN(message: string): boolean {
@@ -210,5 +298,35 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
   private isFormMessage(message: string): boolean {
     return new RegExp('^(.*form).*').test(message);
+  }
+
+  public async run(context): Promise<void> {
+    await super.run(context);
+
+    // Save any state changes. The load happened during the execution of the Dialog.
+    await this.conversationState.saveChanges(context, false);
+    await this.userState.saveChanges(context, false);
+  }
+  
+  public async handleTeamsSigninVerifyState(context: TurnContext, query: SigninStateVerificationQuery): Promise<void> {
+    await (this.dialog as MainDialog).run(context, this.dialogState);
+  }
+
+  private async _messageWithMention(context: TurnContext, member: ChannelAccount): Promise<void> {
+    // Create mention object
+    const mention: Mention = {
+        mentioned: member,
+        text: `<at>${member.name}</at>`,
+        type: 'mention'
+    };
+
+    // Construct message to send
+    const message: Partial<Activity> = {
+        entities: [mention],
+        text: `This Bot is a work in progress. At this time we have some dialogs working. Type anything to get started.`,
+        type: ActivityTypes.Message
+    };
+
+    await context.sendActivity(message);
   }
 }
