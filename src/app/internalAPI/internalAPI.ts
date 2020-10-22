@@ -7,67 +7,53 @@ export class InternalAPI {
     "Authorization": "Basic bVRlcm1zOmxtbnNhZEFTRDNmRFNGM2Zm"
   };
 
-  async getInstruments(): Promise<Instrument[]> {
-    const response = await axios({
+  getInstruments = (): Promise<Instrument[]> => new Promise<Instrument[]>((resolve) => {
+    axios({
       url: this.baseURL + "/Instruments",
       method: "GET",
       headers: this.headers
-    });
+    }).then((response) => resolve(response.data));
+  });
 
-    return response.data;
-  }
-
-  async searchInstrument(searchString: string): Promise<Instrument[]> {
-    const response = await axios({
+  searchInstrument = (searchString: string): Promise<Instrument[]> => new Promise<Instrument[]>((resolve) => {
+    axios({
       url: this.baseURL + "/Instruments/search/" + searchString,
       method: "GET",
       headers: this.headers
-    });
+    }).then((response) => resolve(response.data));
+  });
 
-    return response.data;
-  }
-
-  getInstrumentById = (id: string): Promise<Instrument> => new Promise<Instrument>((resolve, reject) => {
-    console.log('2 calling');
+  getInstrumentById = (id: string): Promise<Instrument> => new Promise<Instrument>((resolve) => {
     axios({
       url: this.baseURL + "/Instruments/" + id,
       method: "GET",
       headers: this.headers
-    }).then((response) => {
-      console.log('3 returning');
-      resolve(response.data);
-    });
+    }).then((response) => resolve(response.data));
   });
 
-  async getLatestPriceById(id: string): Promise<Price> {
-    const response = await axios({
+  getLatestPriceById = (id: string): Promise<Price> => new Promise<Price>((resolve) => {
+    axios({
       url: this.baseURL + "/Prices/latest/" + id,
       method: "GET",
       headers: this.headers
-    });
+    }).then((response) => resolve(response.data));
+  });
 
-    return response.data;
-  }
-
-  async getPriceByDateAndId(isoDate: string, id: string): Promise<Price> {
-    const response = await axios({
+  getPriceByDateAndId = (isoDate: string, id: string): Promise<Price> => new Promise<Price>((resolve) => {
+    axios({
       url: this.baseURL + "/Prices/" + moment(isoDate).format('yyyy-mm-dd') + "/" + id,
       method: "GET",
       headers: this.headers
-    });
+    }).then((response) => resolve(response.data));
+  });
 
-    return response.data;
-  }
-
-  async getPriceCurves(): Promise<Value[]> {
-    const response = await axios({
+  getPriceCurves = (): Promise<Value[]> => new Promise<Value[]>((resolve) => {
+    axios({
       url: this.baseURL + "/Values/priceCurves",
       method: "GET",
       headers: this.headers
-    });
-
-    return response.data;
-  }
+    }).then((response) => resolve(response.data));
+  });
 
   getIssuerTypes = (): Promise<Value[]> => new Promise<Value[]>((resolve) => {
     axios({
@@ -77,23 +63,11 @@ export class InternalAPI {
     }).then((response) => resolve(response.data));
   });
 
-  /* async getIssuerTypes(): Promise<Value[]> {
-    const response = await axios({
-      url: this.baseURL + "/Values/issuerTypes",
-      method: "GET",
-      headers: this.headers
-    });
-
-    return response.data;
-  } */
-
-  async getActivePortfolios(): Promise<Value[]> {
-    const response = await axios({
+  getActivePortfolios = (): Promise<Value[]> => new Promise<Value[]>((resolve) => {
+    axios({
       url: this.baseURL + "/Values/portfolios",
       method: "GET",
       headers: this.headers
-    });
-
-    return response.data;
-  }
+    }).then((response) => resolve(response.data));
+  });
 }
