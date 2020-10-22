@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment = require('moment');
+import * as moment from 'moment';
 
 export class InternalAPI {
   baseURL: string = "https://mtermsportfolioapi.azurewebsites.net";
