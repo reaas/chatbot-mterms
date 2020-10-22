@@ -196,6 +196,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
         });
 
         await context.sendActivity({ text: textMessage, attachments: attachments });
+        await next();
       }
     });
   }
