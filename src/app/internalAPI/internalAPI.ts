@@ -39,18 +39,6 @@ export class InternalAPI {
     });
   });
 
-  /* async getInstumentById(id: string): Promise<Instrument> {
-    console.log('2 calling')
-    axios({
-      url: this.baseURL + "/Instruments/" + id,
-      method: "GET",
-      headers: this.headers
-    }).then((response) => {
-      console.log('3 returning')
-      return response.data;
-    });
-  } */
-
   async getLatestPriceById(id: string): Promise<Price> {
     const response = await axios({
       url: this.baseURL + "/Prices/latest/" + id,
@@ -81,7 +69,15 @@ export class InternalAPI {
     return response.data;
   }
 
-  async getIssuerTypes(): Promise<Value[]> {
+  getIssuerTypes = (): Promise<Value[]> => new Promise<Value[]>((resolve) => {
+    axios({
+      url: this.baseURL + "/Values/issuerTypes",
+      method: "GET",
+      headers: this.headers
+    }).then((response) => resolve(response.data));
+  });
+
+  /* async getIssuerTypes(): Promise<Value[]> {
     const response = await axios({
       url: this.baseURL + "/Values/issuerTypes",
       method: "GET",
@@ -89,7 +85,7 @@ export class InternalAPI {
     });
 
     return response.data;
-  }
+  } */
 
   async getActivePortfolios(): Promise<Value[]> {
     const response = await axios({

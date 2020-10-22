@@ -1,4 +1,4 @@
-import { Action, AdaptiveCard, SubmitAction, TextBlock, TextInput, TextSize, ToggleInput } from "adaptivecards";
+import { Action, AdaptiveCard, Choice, ChoiceSetInput, SubmitAction, TextBlock, TextInput, TextSize, ToggleInput } from "adaptivecards";
 import { ConfirmInput } from "botbuilder-dialogs-adaptive";
 
 export class BuyForm extends AdaptiveCard {
@@ -8,6 +8,8 @@ export class BuyForm extends AdaptiveCard {
   textInputs: TextInput[];
   stressInputs: TextInput[];
   actions: Action[];
+
+  _issuerType: ChoiceSetInput = new ChoiceSetInput();
 
   constructor(header: string, subHeader: string) {
     super();
@@ -50,9 +52,9 @@ export class BuyForm extends AdaptiveCard {
     _percentagePrice.id = "_percentagePrice";
     _percentagePrice.placeholder = "Percentage price";
 
-    const _issuerType: TextInput = new TextInput();
-    _issuerType.id = "_issuerType";
-    _issuerType.placeholder = "Issuer type";
+    this._issuerType.id = "_issuerType";
+    this._issuerType.placeholder = "Issuer type";
+    this._issuerType.choices = [new Choice('Title', 'value')];
 
     const _creditCurve: TextInput = new TextInput();
     _creditCurve.id = "_creditCurve";
@@ -88,7 +90,7 @@ export class BuyForm extends AdaptiveCard {
 
     this.textInputs = [
       _isin, _issuer, _issueDate, _maturityDate, _rate, _manager,
-      _amount, _percentagePrice, _issuerType, _creditCurve, _yieldCurve,
+      _amount, _percentagePrice, _creditCurve, _yieldCurve,
       _bbgid
     ];
 
@@ -104,8 +106,9 @@ export class BuyForm extends AdaptiveCard {
     this.addItem(this.header);
     this.addItem(this.subHeader);
     this.textInputs.forEach((input) => this.addItem(input));
-    this.actions.forEach((action) => this.addAction(action));
+    this.addItem(this._issuerType);
     this.addItem(_stressIncludeInStress);
     this.stressInputs.forEach((input) => this.addItem(input));
+    this.actions.forEach((action) => this.addAction(action));
   }
 }

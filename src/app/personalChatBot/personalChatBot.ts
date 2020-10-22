@@ -6,6 +6,7 @@ import { BuyForm } from "../forms/buyForm";
 import { ISINCard } from "../cards/isinCard";
 import { InternalAPI } from "../internalAPI/internalAPI";
 import * as moment from 'moment';
+import { Choice } from "adaptivecards";
 const log = debug("msteams");
 
 interface History {
@@ -161,13 +162,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
             
             if (isForm) {
               if (isForm.formType === 'buyform') {
-                const isinInput = this.buyForm.textInputs.find(i => i.id === '_isin');
-  
-                if (isinInput) {
-                  isinInput.defaultValue = isinMaybe;
-                }
-  
-                isForm.value = CardFactory.adaptiveCard(this.buyForm.toJSON()); 
+                isForm.value = await this.fillBuyForm(isininfo);
               }
             }
 
@@ -212,4 +207,25 @@ export class PersonalChatBot extends TeamsActivityHandler {
   private isFormMessage(message: string): boolean {
     return new RegExp('^(.*form).*').test(message);
   }
+
+  fillBuyForm = (isininfo: Instrument) => new Promise<Attachment>(async (resolve) => {
+    const isinInput = this.buyForm.textInputs.find(i => i.id === '_isin');
+    const issuerInput = this.buyForm.textInputs.find(i => i.id === '_issuer');
+    const issueDateInput = this.buyForm.textInputs.find(i => i.id === '_issueDate');
+    const maturityDateInput = this.buyForm.textInputs.find(i => i.id === '_maturityDate');
+    const rateInput = this.buyForm.textInputs.find(i => i.id === '_rate');
+    const managerInput = this.buyForm.textInputs.find(i => i.id === '_manager');
+    const issuerTypeInput = this.buyForm._issuerType;
+
+    if (isinInput) isinInput.defaultValue = isininfo.isin;
+    if (issuerInput) issuerInput.defaultValue = isininfo.name;
+    if (issueDateInput) issueDateInput.defaultValue = moment(isininfo.issueDate).format('DD.MM.YYYY');
+    if (maturityDateInput) maturityDateInput.defaultValue = moment(isininfo.maturityDate).format('DD.MM.YYYY');
+    if (rateInput) rateInput.defaultValue = isininfo.rateDetails;
+
+    const issuerTypes = await this.internalAPI.getIssuerTypes();
+    if (issuerTypeInput) issuerTypeInput.choices = issuerTypes.map(it => new Choice(it.Value, it.Key));
+
+    resolve(CardFactory.adaptiveCard(this.buyForm.toJSON()));
+  });
 }

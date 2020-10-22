@@ -1,4 +1,4 @@
 interface Value {
-  key?: string;
-  value?: string;
+  Key?: string;
+  Value: string;
 }
