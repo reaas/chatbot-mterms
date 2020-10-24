@@ -36,10 +36,9 @@ export class PersonalChatBot extends TeamsActivityHandler {
   private userState: BotState;
   private dialog: Dialog;
   private dialogState: StatePropertyAccessor<DialogState>;
+  private buyFormHasTask: boolean  = false;
 
   history: History[] = [];
-
-  inDialog = false;
 
   dbClient = new DBClient();
   internalAPI = new InternalAPI();
@@ -84,25 +83,25 @@ export class PersonalChatBot extends TeamsActivityHandler {
     this.onMessage(async (context, next) => {
       if (context.activity.value) {
         PersonalChatBot.schemaValues = context.activity.value;
+        this.buyFormHasTask = false;
         await context.sendActivity({ text: "If you want to create a task based on the form, please type \"create task\"" }); 
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
         if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && PersonalChatBot.schemaValues) {
-            this.inDialog = true;
-            await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.schemaValues);
-            await context.sendActivity({ text: "The task has been created" }); 
-            await next();
-            return;
+            if (!this.buyFormHasTask) {
+                await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.schemaValues);
+                await context.sendActivity({ text: "The task has been created" }); 
+                this.buyFormHasTask = true;
+                await next();
+                return;
+            } else {
+                await context.sendActivity({ text: "The current buyform is already assigned to a task. Please create a new buyform." }); 
+                return;
+            }
         } else if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && ! PersonalChatBot.schemaValues) {
           await context.sendActivity({ text: "Please send the buyform before requesting the creation of a task. To get the form, please type \"buyform\"" });
-        }
-          else if (this.inDialog == true && !(context.activity.text.toUpperCase() == 'Stop'.toUpperCase())) { 
-            console.log("In dialog")
-            await (this.dialog as MainDialog).run(context, this.dialogState, "");
-            await next();
-            return;
-        }
- 
+        }  
+
         let answer: History[] = [];
         let isinMaybe: string = "";
 
@@ -185,14 +184,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 + '2. buyform/buy form - returns a buy form \r\n'
                 + '3. an ISIN number - returns the internal data of that ISIN \r\n'
                 + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000 \r\n'
-                + '5. "Create task" - Starts a dialog which creates a new task. Type "Stop" to stop. \r\n'
-            });
-          }
-          if (message.toLowerCase() == 'stop' && this.inDialog) {
-            this.inDialog = false;
-            answer.push({
-              type: 'STOP',
-              value: 'Create task stopped.\r\n'
+                + '5. "Create task" - Starts a dialog which creates a new task. \r\n'
             });
           }
         });
