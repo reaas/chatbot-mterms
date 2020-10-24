@@ -39,10 +39,17 @@ export class SimpleGraphClient {
         }
     }
 
-    public async createTask(title : string, description: string): Promise<void> {
+    public async createTask(schemaValues): Promise<void> {
         let taskID : string = ""
         let userID : string = ""
         let taskEtag : string = ""
+
+        let title = schemaValues._isin + ", " + schemaValues._manager
+        let description = "Issuer: " + schemaValues._issuer 
+        + "\n" + "IssueDate: " + schemaValues._issueDate 
+        + "\n" + "MaturityDate: " + schemaValues._maturityDate
+        + "\n" + "Rate: " + schemaValues._rate 
+        + "\n" + "Manager: " + schemaValues._manager
         
         try {
             const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title": title,"assignments":{}});
@@ -67,6 +74,7 @@ export class SimpleGraphClient {
             let newDescription = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
             .header("If-Match", details["@odata.etag"])
             .update({description: description});
+            
         } catch (error) {
             console.log("Error updating the task:", error)
             //Sende ut feilmelding i chatten?

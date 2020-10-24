@@ -71,7 +71,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
   isLast8CharLetters = new RegExp("[A-Za-z]{8}");
   isLast9CharLetters = new RegExp("[A-Za-z]{9}");
 
-  private static title2: any;
+  private static schemaValues: any;
 
   constructor(conversationState: BotState, userState: BotState, dialog: Dialog) {
     super();
@@ -83,17 +83,17 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
     this.onMessage(async (context, next) => {
       if (context.activity.value) {
-        PersonalChatBot.title2 = context.activity.value;
+        PersonalChatBot.schemaValues = context.activity.value;
         await context.sendActivity({ text: "If you want to create a task based on the form, please type \"create task\"" }); 
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
-        if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && PersonalChatBot.title2) {
+        if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && PersonalChatBot.schemaValues) {
             this.inDialog = true;
-            await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.title2._isin);
+            await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.schemaValues);
             await context.sendActivity({ text: "The task has been created" }); 
             await next();
             return;
-        } else if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && ! PersonalChatBot.title2) {
+        } else if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && ! PersonalChatBot.schemaValues) {
           await context.sendActivity({ text: "Please send the buyform before requesting the creation of a task. To get the form, please type \"buyform\"" });
         }
           else if (this.inDialog == true && !(context.activity.text.toUpperCase() == 'Stop'.toUpperCase())) { 

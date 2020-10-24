@@ -20,7 +20,7 @@ const MAIN_WATERFALL_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
 export class MainDialog extends ComponentDialog {
-    private static title2: any;
+    private static schemaValues: any;
     
     constructor(id: string) {
         super(id);
@@ -47,11 +47,11 @@ export class MainDialog extends ComponentDialog {
      * If no dialog is active, it will start the default dialog.
      * @param {TurnContext} context
      */
-    public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>, title: string) {
+    public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>, schemaValues: string) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
 
-        MainDialog.title2 = title;
+        MainDialog.schemaValues = schemaValues;
 
         const dialogContext = await dialogSet.createContext(context);
         const results = await dialogContext.continueDialog();
@@ -75,8 +75,7 @@ export class MainDialog extends ComponentDialog {
 
         if (tokenResponse) {
             await stepContext.context.sendActivity('You are logged in.');
-            await MainDialog.createTask(tokenResponse, "yoyo", MainDialog.title2)
-            console.log("tittel2", MainDialog.title2)
+            await MainDialog.createTask(tokenResponse, MainDialog.schemaValues)
             const siteDetails = new SiteDetails();
             return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
         }
@@ -84,12 +83,12 @@ export class MainDialog extends ComponentDialog {
         return await stepContext.endDialog();  
     }
 
-    public static async createTask(tokenResponse: any, taskName: string, taskDescription: string): Promise<void> {
+    public static async createTask(tokenResponse: any, schemaValues: string): Promise<void> {
         if (!tokenResponse) {
             throw new Error('GraphHelper.createTask(): `tokenResponse` cannot be undefined.')
         }
         const client = new SimpleGraphClient(tokenResponse.token);
-        await client.createTask(taskName, taskDescription)
+        await client.createTask(schemaValues)
         
     }
 
