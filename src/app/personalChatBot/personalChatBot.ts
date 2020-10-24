@@ -71,6 +71,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
   isLast8CharLetters = new RegExp("[A-Za-z]{8}");
   isLast9CharLetters = new RegExp("[A-Za-z]{9}");
 
+  private static title2: any;
 
   constructor(conversationState: BotState, userState: BotState, dialog: Dialog) {
     super();
@@ -82,17 +83,22 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
     this.onMessage(async (context, next) => {
       if (context.activity.value) {
-        console.log('value: ', context.activity.value);
+        PersonalChatBot.title2 = context.activity.value;
+        await context.sendActivity({ text: "If you want to create a task based on the form, please type \"create task\"" }); 
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
-        if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase()) {
+        if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && PersonalChatBot.title2) {
             this.inDialog = true;
-            await (this.dialog as MainDialog).run(context, this.dialogState);
+            await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.title2._isin);
+            await context.sendActivity({ text: "The task has been created" }); 
             await next();
             return;
-        } else if (this.inDialog == true && !(context.activity.text.toUpperCase() == 'Stop'.toUpperCase())) { 
+        } else if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && ! PersonalChatBot.title2) {
+          await context.sendActivity({ text: "Please send the buyform before requesting the creation of a task. To get the form, please type \"buyform\"" });
+        }
+          else if (this.inDialog == true && !(context.activity.text.toUpperCase() == 'Stop'.toUpperCase())) { 
             console.log("In dialog")
-            await (this.dialog as MainDialog).run(context, this.dialogState);
+            await (this.dialog as MainDialog).run(context, this.dialogState, "");
             await next();
             return;
         }
@@ -280,7 +286,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
       console.log('Running dialog with Token Response Event Activity.');
 
       // Run the Dialog with the new Token Response Event Activity.
-      await (this.dialog as MainDialog).run(context, this.dialogState);
+      await (this.dialog as MainDialog).run(context, this.dialogState, "");
 
       // By calling next() you ensure that the next BotHandler is run.
       await next();
@@ -309,7 +315,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
   }
   
   public async handleTeamsSigninVerifyState(context: TurnContext, query: SigninStateVerificationQuery): Promise<void> {
-    await (this.dialog as MainDialog).run(context, this.dialogState);
+    await (this.dialog as MainDialog).run(context, this.dialogState, "");
   }
 
   private async _messageWithMention(context: TurnContext, member: ChannelAccount): Promise<void> {

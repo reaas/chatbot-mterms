@@ -12,12 +12,15 @@ import {
 
 import { SiteDetails } from './siteDetails';
 import { SiteDialog } from './siteDialog';
+import { SimpleGraphClient } from '../helpers/simpleGraphClient'
+import { token } from 'morgan';
 
 const SITE_DIALOG = 'siteDialog';
 const MAIN_WATERFALL_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
 export class MainDialog extends ComponentDialog {
+    private static title2: any;
     
     constructor(id: string) {
         super(id);
@@ -36,6 +39,7 @@ export class MainDialog extends ComponentDialog {
             }));
 
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
+        
     }
 
     /**
@@ -43,9 +47,11 @@ export class MainDialog extends ComponentDialog {
      * If no dialog is active, it will start the default dialog.
      * @param {TurnContext} context
      */
-    public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>) {
+    public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>, title: string) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
+
+        MainDialog.title2 = title;
 
         const dialogContext = await dialogSet.createContext(context);
         const results = await dialogContext.continueDialog();
@@ -66,14 +72,25 @@ export class MainDialog extends ComponentDialog {
      */
     private async initialStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const tokenResponse = stepContext.result;
+
         if (tokenResponse) {
-            await stepContext.context.sendActivity('You are now logged in.');
-            
+            await stepContext.context.sendActivity('You are logged in.');
+            await MainDialog.createTask(tokenResponse, "yoyo", MainDialog.title2)
+            console.log("tittel2", MainDialog.title2)
             const siteDetails = new SiteDetails();
             return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
         return await stepContext.endDialog();  
+    }
+
+    public static async createTask(tokenResponse: any, taskName: string, taskDescription: string): Promise<void> {
+        if (!tokenResponse) {
+            throw new Error('GraphHelper.createTask(): `tokenResponse` cannot be undefined.')
+        }
+        const client = new SimpleGraphClient(tokenResponse.token);
+        await client.createTask(taskName, taskDescription)
+        
     }
 
     /**

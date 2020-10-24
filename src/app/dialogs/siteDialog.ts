@@ -30,12 +30,12 @@ export class SiteDialog extends HelperDialog {
             .addDialog(new OwnerResolverDialog(OWNER_RESOLVER_DIALOG))
             .addDialog(new ConfirmPrompt(CONFIRM_PROMPT))
             .addDialog(new WaterfallDialog(WATERFALL_DIALOG, [
-                this.siteTypeStep.bind(this),
-                this.titleStep.bind(this),
-                this.descriptionStep.bind(this),
-                this.ownerStep.bind(this),
-                this.aliasStep.bind(this),
-                this.confirmStep.bind(this),
+                //this.siteTypeStep.bind(this),
+                //this.titleStep.bind(this),
+                //this.descriptionStep.bind(this),
+                //this.ownerStep.bind(this),
+                //this.aliasStep.bind(this),
+                //this.confirmStep.bind(this),
                 this.finalStep.bind(this)
             ]));
         this.initialDialogId = WATERFALL_DIALOG;

@@ -12,8 +12,16 @@ export class GraphHelper {
             throw new Error('GraphHelper.userExists(): `tokenResponse` cannot be undefined.');
         }
         const client = new SimpleGraphClient(tokenResponse.token);
-        await client.createTask();
+        await client.createTask(tokenResponse, emailAddress);
         return await client.userExists(emailAddress);
+    }
+
+    public static async createTask(tokenResponse: any, taskName: string, taskDescription: string): Promise<void> {
+        if (!tokenResponse) {
+            throw new Error('GraphHelper.createTask(): `tokenResponse` cannot be undefined.')
+        }
+        const client = new SimpleGraphClient(tokenResponse.token);
+        await client.createTask(taskName, taskDescription)
     }
 
     /**

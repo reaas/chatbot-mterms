@@ -1,9 +1,12 @@
 import { Client } from '@microsoft/microsoft-graph-client';
 import { User } from '@microsoft/microsoft-graph-types';
+import { GraphHelper } from '../helpers/graphHelper';
+
 
 export class SimpleGraphClient {
     
     private token: string;
+    private static tokenResponse: any;
     private graphClient: Client;
 
     constructor(token: any) {
@@ -36,12 +39,13 @@ export class SimpleGraphClient {
         }
     }
 
-    public async createTask(): Promise<void> {
+    public async createTask(title : string, description: string): Promise<void> {
         let taskID : string = ""
         let userID : string = ""
         let taskEtag : string = ""
+        
         try {
-            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title":"Ny task","assignments":{}});
+            const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title": title,"assignments":{}});
             taskID = data.id
             userID = data.createdBy.user.id
             taskEtag = data["@odata.etag"]
@@ -60,12 +64,17 @@ export class SimpleGraphClient {
                 }
             }
             let assignment = await this.graphClient.api('planner/tasks/' + taskID).header("If-Match", taskEtag).update(assignee)
-            let description = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
+            let newDescription = await this.graphClient.api('/planner/tasks/' + taskID + '/details')
             .header("If-Match", details["@odata.etag"])
-            .update({description: "Beskrivelse lagt til av bot'en"});
+            .update({description: description});
         } catch (error) {
             console.log("Error updating the task:", error)
             //Sende ut feilmelding i chatten?
         }
     }
+
+    public async consoleLogFunction(): Promise<void> {
+        console.log("Funksjonen kjører")
+    }
+
 }
