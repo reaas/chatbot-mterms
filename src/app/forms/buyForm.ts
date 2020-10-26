@@ -1,9 +1,9 @@
 import { Action, AdaptiveCard, Choice, ChoiceSetInput, Container, HorizontalAlignment, SubmitAction, TextBlock, TextInput, TextSize, ToggleInput, VerticalAlignment } from "adaptivecards";
+import { Attachment } from "botbuilder";
+import { InternalAPI } from "../internalAPI/internalAPI";
+import { Form } from "./abstractForm";
 
-export class BuyForm extends AdaptiveCard {
-  header: TextBlock;
-  subHeader: TextBlock;
-
+export class BuyForm extends Form {
   textInputs: TextInput[];
   stressInputs: TextInput[];
   actions: Action[];
@@ -11,14 +11,13 @@ export class BuyForm extends AdaptiveCard {
   _issuerType: ChoiceSetInput = new ChoiceSetInput();
   _creditCurve: ChoiceSetInput = new ChoiceSetInput();
   _yieldCurve: ChoiceSetInput = new ChoiceSetInput();
+  internalAPI: InternalAPI = new InternalAPI();
 
-  constructor(header: string, subHeader: string) {
-    super();
+  constructor(header: string, subheader: string) {
+    super(header, subheader);
 
-    this.header = new TextBlock(header);
-    this.header.size = TextSize.Large;
-
-    this.subHeader = new TextBlock(subHeader);
+    // Preloading types and curves
+    this.setDropdowns();
 
     // Inputs
     const _isinLabel: TextBlock = new TextBlock("ISIN");
@@ -133,7 +132,7 @@ export class BuyForm extends AdaptiveCard {
 
     // Adding everything to card
     this.addItem(this.header);
-    this.addItem(this.subHeader);
+    this.addItem(this.subheader);
 
     this.addItem(_isinLabel);
     this.addItem(_isin);
@@ -171,5 +170,20 @@ export class BuyForm extends AdaptiveCard {
     this.addItem(_stressCurrency);
 
     this.actions.forEach((action) => this.addAction(action));
+  }
+
+  setDropdowns = (): Promise<void> => new Promise<void>(async (resolve) => {
+    const issuerTypes = await this.internalAPI.getIssuerTypes();
+    this._issuerType.choices = issuerTypes.map(it => new Choice(it.Value, it.Key));
+
+    const priceCurves = await this.internalAPI.getPriceCurves();
+    this._creditCurve.choices = priceCurves.map(pc => new Choice(pc.Value, pc.Key));
+    this._yieldCurve.choices = priceCurves.map(pc => new Choice(pc.Value, pc.Key));
+
+    resolve();
+  });
+
+  fillForm(): Promise<Attachment> {
+    throw new Error("Method not implemented.");
   }
 }

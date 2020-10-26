@@ -8,7 +8,11 @@
     "debug": "gulp serve --debug"
   },
   "dependencies": {
+    "@microsoft/microsoft-graph-client": "^2.1.0",
+    "@microsoft/microsoft-graph-types": "^1.25.0",
     "@microsoft/teams-js": "1.6.0",
+    "@pnp/graph-commonjs": "^2.0.11",
+    "@pnp/nodejs-commonjs": "^2.0.11",
     "adaptivecards": "^2.3.0",
     "axios": "^0.19.2",
     "botbuilder": "4.7.1",

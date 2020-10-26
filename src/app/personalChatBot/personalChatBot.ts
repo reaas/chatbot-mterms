@@ -186,7 +186,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
         });
 
         if (isinToFind.type === 'ISIN') {
-          console.log('isintofind: ', isinToFind)
           await this.internalAPI.getLatestPriceById(isinToFind.value).then(async (price) => {
             const his: History = { type: 'ISINPRICE', value: `The last price of ${isinToFind.value} was ${price.value}\r\n` };
 
@@ -214,10 +213,8 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 const isPrice = answer.find(a => a.type === "PRICE");
 
                 if (isPrice) {
-                  console.log('price')
                   isForm.value = await this.fillBuyForm(isininfo, isPrice.value);
                 } else {
-                  console.log('no price')
                   isForm.value = await this.fillBuyForm(isininfo);                  
                 }
               }
@@ -315,7 +312,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
     const rateInput = this.buyForm.textInputs.find(i => i.id === '_rate');
     const managerInput = this.buyForm.textInputs.find(i => i.id === '_manager');
     const amountInput = this.buyForm.textInputs.find(i => i.id === '_amount');
-    const issuerTypeInput = this.buyForm._issuerType;
 
     if (isinInput) isinInput.defaultValue = isininfo.isin;
     if (issuerInput) issuerInput.defaultValue = isininfo.name;
@@ -323,11 +319,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
     if (maturityDateInput) maturityDateInput.defaultValue = moment(isininfo.maturityDate).format('DD.MM.YYYY');
     if (rateInput) rateInput.defaultValue = isininfo.rateDetails;
 
-    console.log('buyprice: ', buyprice)
     if (buyprice && amountInput) amountInput.defaultValue = buyprice; 
-
-    const issuerTypes = await this.internalAPI.getIssuerTypes();
-    if (issuerTypeInput) issuerTypeInput.choices = issuerTypes.map(it => new Choice(it.Value, it.Key));
 
     resolve(CardFactory.adaptiveCard(this.buyForm.toJSON()));
   });
