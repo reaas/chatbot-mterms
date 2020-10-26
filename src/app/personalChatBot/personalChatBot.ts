@@ -85,13 +85,13 @@ export class PersonalChatBot extends TeamsActivityHandler {
       if (context.activity.value) {
         PersonalChatBot.schemaValues = context.activity.value;
         this.buyFormHasTask = false;
-        await context.sendActivity({ text: "If you want to create a task based on the form, please type \"create task\"" }); 
+        //await context.sendActivity({ text: "If you want to create a task based on the form, please type \"create task\"" }); 
       } else {
         const messageSplit: string[] = context.activity.text.split(" ");
         if (context.activity.text.toUpperCase() == 'Create task'.toUpperCase() && PersonalChatBot.schemaValues) {
             if (!this.buyFormHasTask) {
                 await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.schemaValues);
-                await context.sendActivity({ text: "The task has been created" }); 
+                //await context.sendActivity({ text: "The task has been created" }); 
                 this.buyFormHasTask = true;
                 await next();
                 return;
@@ -173,7 +173,14 @@ export class PersonalChatBot extends TeamsActivityHandler {
           }
 
           if (message.toLowerCase() === 'help') {
-            answer.push({
+            const text = 'This bot can do a number of operations. Review the following: \r\n\r\n'
+                + '1. help - returns this message \r\n'
+                + '2. buyform/buy form - returns a buy form \r\n'
+                + '3. an ISIN number - returns the internal data of that ISIN \r\n'
+                + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000 \r\n'
+                + '5. "Create task" - Starts a dialog which creates a new task. \r\n'
+            await context.sendActivity({ text: text });
+            /* answer.push({
               type: 'HELP',
               value: 'This bot can do a number of operations. Review the following: \r\n\r\n'
                 + '1. help - returns this message \r\n'
@@ -181,7 +188,7 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 + '3. an ISIN number - returns the internal data of that ISIN \r\n'
                 + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000 \r\n'
                 + '5. "Create task" - Starts a dialog which creates a new task. \r\n'
-            });
+            }); */
           }
         });
 
@@ -247,7 +254,9 @@ export class PersonalChatBot extends TeamsActivityHandler {
           }
         });
 
-        await context.sendActivity({ text: textMessage, attachments: attachments });
+        if (textMessage.length > 0 || attachments.length > 0) {
+          await context.sendActivity({ text: textMessage, attachments: attachments });
+        }
         await next();
       }
     });
