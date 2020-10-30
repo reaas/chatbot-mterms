@@ -269,13 +269,14 @@ export class PersonalChatBot extends TeamsActivityHandler {
           if (context.activity.channelId === 'msteams') {
             // Send a message with an @Mention
             await this._messageWithMention(context, member);
+            await (this.dialog as MainDialog).run(context, this.dialogState, "");
           } else {
             // Otherwise we send a normal echo
             await context.sendActivity(`Welcome!`);
+            await (this.dialog as MainDialog).run(context, this.dialogState, "");
           }
         }
       }
-      // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
 

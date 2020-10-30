@@ -39,7 +39,6 @@ export class MainDialog extends ComponentDialog {
             }));
 
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
-        
     }
 
     /**
