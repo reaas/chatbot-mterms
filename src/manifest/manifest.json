@@ -55,7 +55,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{HOSTNAME}}"
+    "{{HOSTNAME}}",
+    "token.botframework.com"
   ],
   "showLoadingIndicator": true
 }
