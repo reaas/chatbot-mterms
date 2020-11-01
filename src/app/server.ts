@@ -6,8 +6,6 @@ import { MsTeamsApiRouter, MsTeamsPageRouter } from "express-msteams-host";
 import * as debug from "debug";
 import * as compression from "compression";
 
-
-
 // Initialize debug logging module
 const log = debug("msteams");
 
@@ -21,8 +19,9 @@ require("dotenv").config();
 
 // The import of components has to be done AFTER the dotenv config
 import * as allComponents from "./TeamsAppsComponents";
-import { BotFrameworkAdapter } from "botbuilder";
 import { PersonalChatBot } from "./personalChatBot/personalChatBot";
+import { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } from "botbuilder";
+import { MainDialog } from "./dialogs/MainDialog";
 
 // Create the Express webserver
 const express = Express();
@@ -87,9 +86,17 @@ botAdapter.onTurnError = async (context, error) => {
 };
 
 // run the bot when messages are received on the specified path
-const bot = new PersonalChatBot();
-express.post("/api/messages", async (request, response) => {
+let conversationState: ConversationState;
+let userState: UserState;
+const memoryStorage = new MemoryStorage();
+conversationState = new ConversationState(memoryStorage);
+userState = new UserState(memoryStorage);
+const dialog = new MainDialog("mainDialog");
+const bot = new PersonalChatBot(conversationState, userState, dialog);
+
+express.post("/api/messages", (request, response) => {
     botAdapter.processActivity(request, response, async (context) => {
         await bot.run(context);
     });
 });
+

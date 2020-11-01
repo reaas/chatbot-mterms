@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.6/MicrosoftTeams.schema.json",
   "manifestVersion": "1.6",
   "id": "cc18f933-0bb2-4ef7-a5a0-438f84e93ecd",
-  "version": "0.0.1",
+  "version": "0.5b",
   "packageName": "{{PACKAGE_NAME}}",
   "developer": {
     "name": "mTerms",
@@ -19,8 +19,8 @@
     "full": "TDT4290 - Customer driven project made for mTerms by NTNU"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "mtermslogosmall.png",
+    "color": "mtermslogo.png"
   },
   "accentColor": "#D85028",
   "configurableTabs": [],
@@ -34,11 +34,17 @@
     "commandLists": [{
       "scopes": ["personal"],
       "commands": [{
-        "title": "Command 1",
-        "description": "Command 1 description"
+        "title": "help",
+        "description": "Show a small help message"
       }, {
-        "title": "Command 2",
-        "description": "Command 2 description"
+        "title": "NO1234567890",
+        "description": "Type an ISIN number to get more information"
+      }, {
+        "title": "90k",
+        "description": "90k will be understood as 90 000"
+      }, {
+        "title": "buyform",
+        "description": "Get a buy form to fill out."
       }]
     }]
   }],
@@ -49,7 +55,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{HOSTNAME}}"
+    "{{HOSTNAME}}",
+    "token.botframework.com"
   ],
   "showLoadingIndicator": true
 }

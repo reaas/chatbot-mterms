@@ -7,6 +7,8 @@ const pb = new PersonalChatBot();
 
 
 
+
+
 test('isISIN test', () => {
     expect(pb.isISIN('ZZ9A9A9BB260')).toBe(true);
     expect(pb.isISIN('ZZ9A9A9wrerye260')).toBe(false);
