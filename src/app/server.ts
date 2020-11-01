@@ -21,7 +21,7 @@ require("dotenv").config();
 import * as allComponents from "./TeamsAppsComponents";
 import { PersonalChatBot } from "./personalChatBot/personalChatBot";
 import { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } from "botbuilder";
-import { MainDialog } from "./dialogs/mainDialog";
+import { MainDialog } from "./dialogs/MainDialog";
 
 // Create the Express webserver
 const express = Express();
