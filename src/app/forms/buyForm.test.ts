@@ -3,7 +3,7 @@ import { BuyForm } from './buyForm'
 const form = new BuyForm("header", "subheader");
 
 test('BuyForm fumber of input fields', () => {
-    expect(form.textInputs.length).toBe(6);
+    expect(form.textInputs.length).toBe(11);
 })
 
 test('BuyForm number of actions', () => {

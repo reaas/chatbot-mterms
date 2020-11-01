@@ -6,5 +6,5 @@ interface Instrument {
   maturityDate?: string;
   rateDetails?: string;
   type?: string;
-  figi?: string;
+  figi?: string | null;
 }
