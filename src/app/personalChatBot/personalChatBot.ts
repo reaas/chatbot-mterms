@@ -14,7 +14,7 @@ import {
   CardFactory
 } from 'botbuilder';
 import { Dialog, DialogState } from 'botbuilder-dialogs';
-import { MainDialog } from '../dialogs/mainDialog';
+import { MainDialog } from '../dialogs/MainDialog';
 
 import * as debug from "debug";
 import * as AdaptiveCards from "adaptivecards";
