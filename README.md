@@ -3,7 +3,7 @@
 ## Configuration
 
 Configuration is stored in the `.env` file.
-The tokens in this file must match the tokens in Azure bot channels registration.
+The tokens in this file must match the tokens in Microsoft Azure bot channels registration.
 
 ## Building the app
 
