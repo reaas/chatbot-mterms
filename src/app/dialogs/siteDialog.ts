@@ -40,14 +40,11 @@ export class SiteDialog extends HelperDialog {
      */
     private async siteTypeStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const siteDetails = stepContext.options as SiteDetails;
-
         if (!siteDetails.siteType) {
-
             return await stepContext.prompt(CHOICE_PROMPT, {
                 choices: ChoiceFactory.toChoices(['Team Site', 'Communication Site']),
                 prompt: 'Select site type.'
             });
-
         } else {
             return await stepContext.next(siteDetails.siteType);
         }
@@ -59,7 +56,6 @@ export class SiteDialog extends HelperDialog {
     private async finalStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         if (stepContext.result === true) {
             const siteDetails = stepContext.options as SiteDetails;
-
             return await stepContext.endDialog(siteDetails);
         } else {
             return await stepContext.endDialog();

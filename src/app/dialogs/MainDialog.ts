@@ -24,7 +24,6 @@ export class MainDialog extends ComponentDialog {
     
     constructor(id: string) {
         super(id);
-
         this.addDialog(new SiteDialog(SITE_DIALOG))
             .addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
                 this.promptStep.bind(this),
@@ -37,7 +36,6 @@ export class MainDialog extends ComponentDialog {
                 timeout: 300000,
                 title: 'Sign In'
             }));
-
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
     }
 
@@ -49,7 +47,6 @@ export class MainDialog extends ComponentDialog {
     public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>, schemaValues: string) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
-
         MainDialog.schemaValues = schemaValues;
 
         const dialogContext = await dialogSet.createContext(context);
@@ -88,14 +85,12 @@ export class MainDialog extends ComponentDialog {
         }
         const client = new SimpleGraphClient(tokenResponse.token);
         await client.createTask(schemaValues)
-        
     }
 
     /**
      * This is the final step in the main waterfall dialog.
      */
     private async finalStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
-        console.log(WaterfallStepContext);
         if (stepContext.result) {
             const result = stepContext.result as SiteDetails;
             const msg = `I have created a ${ JSON.stringify(result) }`;

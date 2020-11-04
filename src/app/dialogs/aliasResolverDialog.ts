@@ -1,41 +1,38 @@
 import {
-  DialogTurnResult,
   OAuthPrompt,
   PromptValidatorContext,
   TextPrompt,
   WaterfallDialog,
-  WaterfallStepContext
+  WaterfallStepContext,
+  ComponentDialog,
+  DialogContext,
+  DialogTurnResult,
+  DialogTurnStatus 
 } from 'botbuilder-dialogs';
 import { GraphHelper } from '../helpers/graphHelper';
-import { HelperDialog } from './helperDialog';
 
 const TEXT_PROMPT = 'textPrompt';
 const WATERFALL_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
-export class AliasResolverDialog extends HelperDialog {
+export class AliasResolverDialog extends ComponentDialog {
   private static tokenResponse: any;
   
   private static async aliasPromptValidator(promptContext: PromptValidatorContext<string>): Promise<boolean> {
     if (promptContext.recognized.succeeded) {
-      
       const alias: string = promptContext.recognized.value!;
-      
       if (await GraphHelper.aliasExists(AliasResolverDialog.tokenResponse, alias))  {
         await promptContext.context.sendActivity('Alias already exist.');
         return false;
       }
-
       return true;
-
     } else {
       return false;
     }
   }
 
   constructor(id: string) {
-    super(id || 'aliasResolverDialog', 'GraphConnection');
-    
+    super(id || 'GraphConnection');
     this
         .addDialog(new TextPrompt(TEXT_PROMPT, AliasResolverDialog.aliasPromptValidator.bind(this)))
         .addDialog(new OAuthPrompt(OAUTH_PROMPT, {
@@ -49,14 +46,9 @@ export class AliasResolverDialog extends HelperDialog {
           this.initialStep.bind(this),
           this.finalStep.bind(this)
         ]));
-
     this.initialDialogId = WATERFALL_DIALOG;
-
   }
 
-  /**
-   * Prompt step in the waterfall. 
-   */
   private async promptStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
       return await stepContext.beginDialog(OAUTH_PROMPT);
   }
@@ -64,9 +56,7 @@ export class AliasResolverDialog extends HelperDialog {
   private async initialStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
     const tokenResponse = stepContext.result;
     if (tokenResponse && tokenResponse.token) {
-      
       AliasResolverDialog.tokenResponse = tokenResponse;
-
       const siteDetails = (stepContext.options as any).siteDetails;
       const promptMsg = 'Provide an alias';
 

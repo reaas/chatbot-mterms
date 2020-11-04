@@ -1,30 +1,27 @@
 import {
-  DialogTurnResult,
   OAuthPrompt,
   PromptValidatorContext,
   TextPrompt,
   WaterfallDialog,
-  WaterfallStepContext
+  WaterfallStepContext,
+  ComponentDialog,
+  DialogContext,
+  DialogTurnResult,
+  DialogTurnStatus 
 } from 'botbuilder-dialogs';
-import { HelperDialog } from './helperDialog';
 import { GraphHelper } from '../helpers/graphHelper';
 
 const TEXT_PROMPT = 'textPrompt';
 const WATERFALL_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt'
 
-export class OwnerResolverDialog extends HelperDialog {
+export class OwnerResolverDialog extends ComponentDialog {
   private static tokenResponse: any;
 
   private static async ownerPromptValidator(promptContext: PromptValidatorContext<string>): Promise<boolean> {
     if (promptContext.recognized.succeeded) {
       
       const owner: string = promptContext.recognized.value!;
-      if (!OwnerResolverDialog.validateEmail(owner)) {
-        promptContext.context.sendActivity('Malformatted email adress.');
-        return false;
-      }
-
       if (!await GraphHelper.userExists(OwnerResolverDialog.tokenResponse, owner)) {
         await promptContext.context.sendActivity('User does not exist.');
         return false;
@@ -37,14 +34,8 @@ export class OwnerResolverDialog extends HelperDialog {
     }
   }
 
-  private static validateEmail(email: string): boolean {
-    const re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))){2,6}$/i;
-    return re.test(email);
-  }
-
   constructor(id: string) {
-    super(id || 'ownerResolverDialog', 'GraphConnection');
-    
+    super(id || 'GraphConnection');
     this
         .addDialog(new TextPrompt(TEXT_PROMPT, OwnerResolverDialog.ownerPromptValidator.bind(this)))
         .addDialog(new OAuthPrompt(OAUTH_PROMPT, {
@@ -60,7 +51,6 @@ export class OwnerResolverDialog extends HelperDialog {
         ]));
 
     this.initialDialogId = WATERFALL_DIALOG;
-
   }
 
  private async promptStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
@@ -70,12 +60,10 @@ export class OwnerResolverDialog extends HelperDialog {
   private async initialStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
     const tokenResponse = stepContext.result;
     if (tokenResponse && tokenResponse.token) {
-      
       OwnerResolverDialog.tokenResponse = tokenResponse;
 
       const siteDetails = (stepContext.options as any).siteDetails;
       const promptMsg = 'Provide an owner email';
-
       if (!siteDetails.owner) {
         return await stepContext.prompt(TEXT_PROMPT, {
           prompt: promptMsg
