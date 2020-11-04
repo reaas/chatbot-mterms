@@ -5,11 +5,11 @@ import {
     DialogTurnResult,
     TextPrompt,
     WaterfallDialog,
-    WaterfallStepContext
+    WaterfallStepContext,
+    ComponentDialog
 } from 'botbuilder-dialogs';
 
 import {AliasResolverDialog} from './aliasResolverDialog';
-import { HelperDialog } from './helperDialog';
 import { OwnerResolverDialog } from './ownerResolverDialog';
 import { SiteDetails } from './siteDetails';
 
@@ -20,9 +20,9 @@ const OWNER_RESOLVER_DIALOG = 'ownerResolverDialog';
 const CONFIRM_PROMPT = 'confirmPrompt';
 const WATERFALL_DIALOG = 'waterfallDialog';
 
-export class SiteDialog extends HelperDialog {
+export class SiteDialog extends ComponentDialog {
     constructor(id: string) {
-        super(id || 'siteDialog', 'GraphConnection');
+        super(id || 'GraphConnection');
         this
             .addDialog(new AliasResolverDialog(ALIAS_RESOLVER_DIALOG))
             .addDialog(new ChoicePrompt(CHOICE_PROMPT))
