@@ -11,11 +11,9 @@ import {
 } from 'botbuilder-dialogs';
 
 import { SiteDetails } from './siteDetails';
-import { SiteDialog } from './siteDialog';
 import { SimpleGraphClient } from '../helpers/simpleGraphClient'
 import { token } from 'morgan';
 
-const SITE_DIALOG = 'siteDialog';
 const MAIN_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
@@ -24,8 +22,7 @@ export class MainDialog extends ComponentDialog {
     
     constructor(id: string) {
         super(id);
-        this.addDialog(new SiteDialog(SITE_DIALOG))
-            .addDialog(new WaterfallDialog(MAIN_DIALOG, [
+        this.addDialog(new WaterfallDialog(MAIN_DIALOG, [
                 this.promptStep.bind(this),
                 this.initialStep.bind(this),
                 this.finalStep.bind(this)
@@ -62,7 +59,13 @@ export class MainDialog extends ComponentDialog {
             await stepContext.context.sendActivity('You are logged in.');
             await MainDialog.createTask(tokenResponse, MainDialog.schemaValues)
             const siteDetails = new SiteDetails();
-            return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
+            if (stepContext.result === true) {
+                const siteDetails = stepContext.options as SiteDetails;
+                return await stepContext.endDialog(siteDetails);
+            } else {
+                return await stepContext.endDialog();
+            }
+           //return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
         return await stepContext.endDialog();  
