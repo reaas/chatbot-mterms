@@ -180,7 +180,8 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 + '2. buyform/buy form - returns a buy form \r\n'
                 + '3. an ISIN number - returns the internal data of that ISIN \r\n'
                 + '4. price in different formats - returns the price as en integer, e.g. 90k will return 90000 \r\n'
-                + '5. "Create task" - Starts a dialog which creates a new task. \r\n'
+                + '5. ISIN number followed by price gives latest price \r\n'
+                + '6. "Create task" - Starts a dialog which creates a new task. \r\n'
             });
           }
         });
