@@ -43,9 +43,6 @@ export class SimpleGraphClient {
         let taskID : string = ""
         let userID : string = ""
         let taskEtag : string = ""
-
-        console.log("heyhey:", schemaValues)
-
         let title = "Purchase: " + schemaValues._isin + ", " + schemaValues._issuer 
         let description = "Issuer: " + schemaValues._issuer 
         + "\n" + "Issue Date: " + schemaValues._issueDate 
