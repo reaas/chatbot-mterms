@@ -20,12 +20,16 @@ const mockInstrument: Instrument = {
 
 const internalAPI = new InternalAPI();
 
-
-
-test("Internal API getInstrumentById test", async () => {
-    const instrument: Instrument = await internalAPI.getInstrumentById('IT2839184728');
-    console.log(instrument);
-    expect(instrument).toMatchObject(mockInstrument);  
+test("Internal API getInstrumentById test, json has all attributes", async () => {
+    const instrument: Instrument = await internalAPI.getInstrumentById('VRAKSJDATT');
+    expect(instrument.hasOwnProperty("id")).toBe(true);
+    expect(instrument.hasOwnProperty("name")).toBe(true);
+    expect(instrument.hasOwnProperty("isin")).toBe(true);
+    expect(instrument.hasOwnProperty("issueDate")).toBe(true);
+    expect(instrument.hasOwnProperty("maturityDate")).toBe(true);
+    expect(instrument.hasOwnProperty("rateDetails")).toBe(true);
+    expect(instrument.hasOwnProperty("type")).toBe(true);
+    expect(instrument.hasOwnProperty("figi")).toBe(true);
 })
 
 
@@ -45,6 +49,9 @@ test("Internal API getPriceCurves test", async () => {
 })
 
 test("Internal API getPriceByDateAndId test", async () => {
-    const priceByDateAndId = await internalAPI.getPriceByDateAndId("1996-01-18", "IDnumber");
-    expect(priceByDateAndId).toMatchObject(mockPriceByDateAndId);
+    const priceByDateAndId = await internalAPI.getPriceByDateAndId("2020-10-23", "NO0010627805");
+    expect(priceByDateAndId.hasOwnProperty("instrumentID")).toBe(true);
+    expect(priceByDateAndId.hasOwnProperty("date")).toBe(true);
+    expect(priceByDateAndId.hasOwnProperty("value")).toBe(true);
+
 })
