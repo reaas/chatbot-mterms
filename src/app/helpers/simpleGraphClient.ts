@@ -43,13 +43,20 @@ export class SimpleGraphClient {
         let taskID : string = ""
         let userID : string = ""
         let taskEtag : string = ""
-
-        let title = schemaValues._isin + ", " + schemaValues._manager
+        let title = "Purchase: " + schemaValues._isin + ", " + schemaValues._issuer 
         let description = "Issuer: " + schemaValues._issuer 
-        + "\n" + "IssueDate: " + schemaValues._issueDate 
-        + "\n" + "MaturityDate: " + schemaValues._maturityDate
+        + "\n" + "Issue Date: " + schemaValues._issueDate 
+        + "\n" + "Maturity Date: " + schemaValues._maturityDate
         + "\n" + "Rate: " + schemaValues._rate 
         + "\n" + "Manager: " + schemaValues._manager
+        + "\n" + "Amount: " + schemaValues._amount
+        + "\n" + "Percentage Price: " + schemaValues._percentagePrice
+        + "\n" + "Credit Curve: " + schemaValues._creditCurve
+        + "\n" + "Issuer Type: " + schemaValues._issuerType
+        + "\n" + "Included in Stress: " + schemaValues._stressIncludeInStress
+        + "\n" + "Stress Interest Rate: " + schemaValues._stressInterestRate
+        + "\n" + "Stress Spread: " + schemaValues._stressSpread
+        + "\n" + "Stress Currency: " + schemaValues._stressCurrency
         
         try {
             const data = await this.graphClient.api('/planner/tasks').post({"planId":"ooju5jbJVU6QGW5aMiLTjZgAC5KZ","title": title,"assignments":{}});
@@ -79,10 +86,6 @@ export class SimpleGraphClient {
             console.log("Error updating the task:", error)
             //Sende ut feilmelding i chatten?
         }
-    }
-
-    public async consoleLogFunction(): Promise<void> {
-        console.log("Funksjonen kjører")
     }
 
 }
