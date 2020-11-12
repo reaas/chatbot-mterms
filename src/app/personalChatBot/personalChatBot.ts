@@ -14,7 +14,7 @@ import {
   CardFactory
 } from 'botbuilder';
 import { Dialog, DialogState } from 'botbuilder-dialogs';
-import { MainDialog } from '../dialogs/MainDialog';
+import { MainDialog } from '../dialogs/mainDialog';
 
 import * as debug from "debug";
 import * as AdaptiveCards from "adaptivecards";
@@ -37,6 +37,8 @@ export class PersonalChatBot extends TeamsActivityHandler {
   private dialog: Dialog;
   private dialogState: StatePropertyAccessor<DialogState>;
   private buyFormHasTask: boolean  = false;
+  private lastIsin;
+
 
   history: History[] = [];
 
@@ -72,13 +74,19 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
   private static schemaValues: any;
 
+
+    private async t(context) {
+        setTimeout(() => {
+            context.SendActivity({ text: "A" }); 
+        }, 1000); // timeout i millisekunder
+    }
+
   constructor(conversationState: BotState, userState: BotState, dialog: Dialog) {
     super();
     this.conversationState = conversationState as ConversationState;
     this.userState = userState as UserState;
     this.dialog = dialog;
     this.dialogState = this.conversationState.createProperty<DialogState>('DialogState');
-
 
     this.onMessage(async (context, next) => {
       if (context.activity.value) {
@@ -92,6 +100,15 @@ export class PersonalChatBot extends TeamsActivityHandler {
                 await (this.dialog as MainDialog).run(context, this.dialogState, PersonalChatBot.schemaValues);
                 await context.sendActivity({ text: "The task has been created" }); 
                 this.buyFormHasTask = true;
+                
+                const price = await this.internalAPI.getLatestPriceById("NO0010040231").then(async (p) => {
+                    return p.value;
+                });
+                // console.log(this.buyForm.toJSON().parse()!);
+                await new Promise(resolve => setTimeout(() => resolve(
+                    context.sendActivity('The calculated price was ' + price)
+                ), 5000));
+
                 await next();
                 return;
             } else {
@@ -211,7 +228,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
             if (isForm) {
               if (isForm.formType === 'buyform') {
                 const isPrice = answer.find(a => a.type === "PRICE");
-
                 if (isPrice) {
                   isForm.value = await this.fillBuyForm(isininfo, isPrice.value);
                 } else {

@@ -11,12 +11,10 @@ import {
 } from 'botbuilder-dialogs';
 
 import { SiteDetails } from './siteDetails';
-import { SiteDialog } from './siteDialog';
 import { SimpleGraphClient } from '../helpers/simpleGraphClient'
 import { token } from 'morgan';
 
-const SITE_DIALOG = 'siteDialog';
-const MAIN_WATERFALL_DIALOG = 'waterfallDialog';
+const MAIN_DIALOG = 'waterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
 export class MainDialog extends ComponentDialog {
@@ -24,9 +22,7 @@ export class MainDialog extends ComponentDialog {
     
     constructor(id: string) {
         super(id);
-
-        this.addDialog(new SiteDialog(SITE_DIALOG))
-            .addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
+        this.addDialog(new WaterfallDialog(MAIN_DIALOG, [
                 this.promptStep.bind(this),
                 this.initialStep.bind(this),
                 this.finalStep.bind(this)
@@ -34,22 +30,15 @@ export class MainDialog extends ComponentDialog {
             .addDialog(new OAuthPrompt(OAUTH_PROMPT, {
                 connectionName: 'GraphConnection',
                 text: 'Please Sign In',
-                timeout: 300000,
+                timeout: 100,
                 title: 'Sign In'
             }));
-
-        this.initialDialogId = MAIN_WATERFALL_DIALOG;
+        this.initialDialogId = MAIN_DIALOG;
     }
 
-    /**
-     * The run method handles the incoming activity (in the form of a DialogContext) and passes it through the dialog system.
-     * If no dialog is active, it will start the default dialog.
-     * @param {TurnContext} context
-     */
     public async run(context: TurnContext, accessor: StatePropertyAccessor<DialogState>, schemaValues: string) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
-
         MainDialog.schemaValues = schemaValues;
 
         const dialogContext = await dialogSet.createContext(context);
@@ -59,16 +48,10 @@ export class MainDialog extends ComponentDialog {
         }
     }
 
-    /**
-     * Prompt step in the waterfall. 
-     */
     private async promptStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         return await stepContext.beginDialog(OAUTH_PROMPT);
     }
 
-    /**
-     * Initial step in the waterfall. This will kick of the site dialog
-     */
     private async initialStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const tokenResponse = stepContext.result;
 
@@ -76,7 +59,13 @@ export class MainDialog extends ComponentDialog {
             await stepContext.context.sendActivity('You are logged in.');
             await MainDialog.createTask(tokenResponse, MainDialog.schemaValues)
             const siteDetails = new SiteDetails();
-            return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
+            if (stepContext.result === true) {
+                const siteDetails = stepContext.options as SiteDetails;
+                return await stepContext.endDialog(siteDetails);
+            } else {
+                return await stepContext.endDialog();
+            }
+           //return await stepContext.beginDialog(SITE_DIALOG, siteDetails);
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
         return await stepContext.endDialog();  
@@ -88,14 +77,9 @@ export class MainDialog extends ComponentDialog {
         }
         const client = new SimpleGraphClient(tokenResponse.token);
         await client.createTask(schemaValues)
-        
     }
 
-    /**
-     * This is the final step in the main waterfall dialog.
-     */
     private async finalStep(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
-        console.log(WaterfallStepContext);
         if (stepContext.result) {
             const result = stepContext.result as SiteDetails;
             const msg = `I have created a ${ JSON.stringify(result) }`;
