@@ -17,13 +17,11 @@ import { Dialog, DialogState } from 'botbuilder-dialogs';
 import { MainDialog } from '../dialogs/mainDialog';
 
 import * as debug from "debug";
-import * as AdaptiveCards from "adaptivecards";
 import { DBClient } from "../TeamsAppsComponents";
 import { BuyForm } from "../forms/buyForm";
 import { ISINCard } from "../cards/isinCard";
 import { InternalAPI } from "../internalAPI/internalAPI";
 import * as moment from 'moment';
-import { Choice } from "adaptivecards";
 
 interface History {
   type: string;
@@ -44,7 +42,6 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
   dbClient = new DBClient();
   internalAPI = new InternalAPI();
-  adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
   isinCard: ISINCard = new ISINCard();
 
@@ -263,8 +260,10 @@ export class PersonalChatBot extends TeamsActivityHandler {
           }
         });
 
-        await context.sendActivity({ text: textMessage, attachments: attachments });
-        await next();
+        if (textMessage.length > 0 || attachments.length > 0) {
+          await context.sendActivity({ text: textMessage, attachments: attachments });
+          await next();
+        }
       }
     });
 
