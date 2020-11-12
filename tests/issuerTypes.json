@@ -1,0 +1,110 @@
+[
+    {
+      "Key": "101",
+      "Value": "101 Innskudd bank"
+    },
+    {
+      "Key": "102",
+      "Value": "102 Fordringer"
+    },
+    {
+      "Key": "201",
+      "Value": "201 Stat"
+    },
+    {
+      "Key": "301",
+      "Value": "301 Lån"
+    },
+    {
+      "Key": "302",
+      "Value": "302 Lån"
+    },
+    {
+      "Key": "601",
+      "Value": "601 Eiendom - direkte eiet"
+    },
+    {
+      "Key": "602",
+      "Value": "602 Aksjer og andeler i datterforetak"
+    },
+    {
+      "Key": "603",
+      "Value": "603 Eiendom - fordringer/lån"
+    },
+    {
+      "Key": "701",
+      "Value": "701 Finans (20%)"
+    },
+    {
+      "Key": "702",
+      "Value": "702 Finans (100%)"
+    },
+    {
+      "Key": "751",
+      "Value": "751 Derivater - valuta"
+    },
+    {
+      "Key": "752",
+      "Value": "752 Derivater - rente"
+    },
+    {
+      "Key": "753",
+      "Value": "753 Derivater - aksjeopsjoner"
+    },
+    {
+      "Key": "754",
+      "Value": "754 Derivater - aksjefutures"
+    },
+    {
+      "Key": "801",
+      "Value": "801 Aksjer"
+    },
+    {
+      "Key": "802",
+      "Value": "802 Aksjefond"
+    },
+    {
+      "Key": "803",
+      "Value": "803 Hedgefond"
+    },
+    {
+      "Key": "804",
+      "Value": "804 Obligasjonsfond"
+    },
+    {
+      "Key": "805",
+      "Value": "805 Private Equity Fond"
+    },
+    {
+      "Key": "806",
+      "Value": "806 Andeler i ANS/KS (LP)"
+    },
+    {
+      "Key": "807",
+      "Value": "807 Andeler i indre selskaper"
+    },
+    {
+      "Key": "902",
+      "Value": "902 Kommune"
+    },
+    {
+      "Key": "903",
+      "Value": "903 Boligkreditt"
+    },
+    {
+      "Key": "904",
+      "Value": "904 Foretak (100%)"
+    },
+    {
+      "Key": "905",
+      "Value": "905 Foretak (20%)"
+    },
+    {
+      "Key": "906",
+      "Value": "906 Foretak (50%)"
+    },
+    {
+      "Key": "907",
+      "Value": "907 Foretak med pant i eiendom (100%)"
+    }
+]

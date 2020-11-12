@@ -16,20 +16,7 @@ export class DBClient {
     return result;
   }
 
-  // Deprecated
-  async insertMock() {
-    try {
-      const collection = this.database.collection("isin");
-
-      const mock = require("./mockdata.json");
-
-      const result = await collection.insertMany(mock);
-
-      return result;
-    } catch (error) {
-      console.error("Error inserting mockdata: ", error);
-    } finally {
-      await this.client.close();
-    }
+  isConnected() {
+    return this.client.isConnected();
   }
 }

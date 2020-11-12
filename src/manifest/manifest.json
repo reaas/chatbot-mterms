@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.6/MicrosoftTeams.schema.json",
   "manifestVersion": "1.6",
-  "id": "59295273-32d6-4812-b2e6-ff3f3fdc2761",
+  "id": "cc18f933-0bb2-4ef7-a5a0-438f84e93ecd",
   "version": "0.5b",
   "packageName": "{{PACKAGE_NAME}}",
   "developer": {
@@ -26,7 +26,7 @@
   "configurableTabs": [],
   "staticTabs": [],
   "bots": [{
-    "botId": "59295273-32d6-4812-b2e6-ff3f3fdc2761",
+    "botId": "cc18f933-0bb2-4ef7-a5a0-438f84e93ecd",
     "needsChannelSelector": false,
     "isNotificationOnly": false,
     "scopes": ["personal", "team"],

@@ -24,7 +24,6 @@ import { ISINCard } from "../cards/isinCard";
 import { InternalAPI } from "../internalAPI/internalAPI";
 import * as moment from 'moment';
 import { Choice } from "adaptivecards";
-const log = debug("msteams");
 
 interface History {
   type: string;
@@ -294,15 +293,15 @@ export class PersonalChatBot extends TeamsActivityHandler {
 
   }
 
-  private isISIN(message: string): boolean {
+  public isISIN(message: string): boolean {
     return new RegExp('[A-Z]{2}([A-Z0-9]){9}[0-9]').test(message);
   }
 
-  private containsNumber(message: string): boolean {
+  public containsNumber(message: string): boolean {
     return new RegExp('[0-9]').test(message);
   }
 
-  private isFormMessage(message: string): boolean {
+  public isFormMessage(message: string): boolean {
     return new RegExp('^(.*form).*').test(message);
   }
 

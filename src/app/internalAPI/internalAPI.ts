@@ -1,5 +1,9 @@
 import axios from 'axios';
-import moment = require('moment');
+//import * as moment from 'moment';
+let moment = require("moment");
+if ("default" in moment) {
+    moment = moment["default"];
+}
 
 export class InternalAPI {
   baseURL: string = "https://mtermsportfolioapi.azurewebsites.net";
@@ -40,8 +44,10 @@ export class InternalAPI {
   });
 
   getPriceByDateAndId = (isoDate: string, id: string): Promise<Price> => new Promise<Price>((resolve) => {
+    const date = moment(isoDate).format('YYYY-MM-DD');
+    console.log(date);
     axios({
-      url: this.baseURL + "/Prices/" + moment(isoDate).format('yyyy-mm-dd') + "/" + id,
+      url: this.baseURL + "/Prices/" + date + "/" + id,
       method: "GET",
       headers: this.headers
     }).then((response) => resolve(response.data));

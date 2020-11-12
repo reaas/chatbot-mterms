@@ -1,0 +1,322 @@
+[
+    {
+      "Key": "AKGLE_T",
+      "Value": "AKGLE_T: Aksjer Global Eksternt, uten v"
+    },
+    {
+      "Key": "AKGLI_K",
+      "Value": "AKGLI_K: Aksjer Global Internt, Kollekt"
+    },
+    {
+      "Key": "AKNOE_K",
+      "Value": "AKNOE_K: Aksjer Norge Eksternt, Kollekt"
+    },
+    {
+      "Key": "AKNOE_S",
+      "Value": "AKNOE_S: Aksjer Norge Eksternt, Selskap"
+    },
+    {
+      "Key": "AKNOI_K",
+      "Value": "AKNOI_K: Aksjer Norge Internt, Kollekti"
+    },
+    {
+      "Key": "AKTIVE_K",
+      "Value": "AKTIVE_K: Aksjer Aktive Eksternt, Kollek"
+    },
+    {
+      "Key": "AKTIVE_S",
+      "Value": "AKTIVE_S: Aksjer Aktive Eksternt, Selska"
+    },
+    {
+      "Key": "DVOBG_K",
+      "Value": "DVOBG_K: Obligasjoner Derivater Omløp G"
+    },
+    {
+      "Key": "DVOBO_K",
+      "Value": "DVOBO_K: Obligasjoner Derivater Omløp I"
+    },
+    {
+      "Key": "DVOBO_S",
+      "Value": "DVOBO_S: Obligasjoner Derivater Omløp I"
+    },
+    {
+      "Key": "DVRR_K",
+      "Value": "DVRR_K: Realrente Derivater, Kollektiv"
+    },
+    {
+      "Key": "EIBI_K",
+      "Value": "EIBI_K: Eiendom Belånt Internt, kollek"
+    },
+    {
+      "Key": "EIDM_K",
+      "Value": "EIDM_K: Eiendom Belånt Eksternt fond,"
+    },
+    {
+      "Key": "EIIN_K",
+      "Value": "EIIN_K: Eiendom internt, kollektiv"
+    },
+    {
+      "Key": "EIIN_S",
+      "Value": "EIIN_S: Eiendom internt, Selskap"
+    },
+    {
+      "Key": "EINO_K",
+      "Value": "EINO_K: Eiendom eksternt fond NOK, kol"
+    },
+    {
+      "Key": "EINO_S",
+      "Value": "EINO_S: Eiendom eksternt fond NOK, Sel"
+    },
+    {
+      "Key": "EINO_T",
+      "Value": "EINO_T: Eiendom, Tingskade"
+    },
+    {
+      "Key": "EIPR_K",
+      "Value": "EIPR_K: Eiendom prosjekter, kollektiv"
+    },
+    {
+      "Key": "FXTRO_K",
+      "Value": "FXTRO_K: FX Trading Opsjoner, Kollektiv"
+    },
+    {
+      "Key": "HDGA_T",
+      "Value": "HDGA_T: Hedgefond Irregulary Priced, T"
+    },
+    {
+      "Key": "HEDF_K",
+      "Value": "HEDF_K: Hedgefond, Kollektiv"
+    },
+    {
+      "Key": "HYAR_K",
+      "Value": "HYAR_K: High Yield External Fund"
+    },
+    {
+      "Key": "HYOB_K",
+      "Value": "HYOB_K: High Yield Obligasjonsfond, Ko"
+    },
+    {
+      "Key": "INDEKS_K",
+      "Value": "INDEKS_K: Aksjer Indeks Eksternt, Kollek"
+    },
+    {
+      "Key": "INDEKS_S",
+      "Value": "INDEKS_S: Aksjer Indeks Eksternt, Selska"
+    },
+    {
+      "Key": "INFR_K",
+      "Value": "INFR_K: Infrastruktur, Kollektiv"
+    },
+    {
+      "Key": "KOOB_K",
+      "Value": "KOOB_K: Konvertible Obligasjonsfond, K"
+    },
+    {
+      "Key": "KOOF_K",
+      "Value": "KOOF_K: Kontanter Opsjoner og Futures,"
+    },
+    {
+      "Key": "KOOF_S",
+      "Value": "KOOF_S: Kontanter Opsjoner og Futures,"
+    },
+    {
+      "Key": "OBFO_T",
+      "Value": "OBFO_T: Obligasjonsfond, Tingskade"
+    },
+    {
+      "Key": "OBGLE_K",
+      "Value": "OBGLE_K: Obligasjoner Omløp Eksternt, K"
+    },
+    {
+      "Key": "OBGLE_S",
+      "Value": "OBGLE_S: Obligasjoner Omløp Eksternt, S"
+    },
+    {
+      "Key": "OBHF_K",
+      "Value": "OBHF_K: Obligasjoner Hold til Forfall,"
+    },
+    {
+      "Key": "OBHF_S",
+      "Value": "OBHF_S: Obligasjoner Hold til Forfall,"
+    },
+    {
+      "Key": "OBNOI_K",
+      "Value": "OBNOI_K: Obligasjoner Omløp Internt, Ko"
+    },
+    {
+      "Key": "OBNOI_S",
+      "Value": "OBNOI_S: Obligasjoner Omløp Internt, Se"
+    },
+    {
+      "Key": "OBUF_K",
+      "Value": "OBUF_K: Obligasjoner Utlån og Fordring"
+    },
+    {
+      "Key": "OBUF_S",
+      "Value": "OBUF_S: Obligasjoner Utlån og Fordring"
+    },
+    {
+      "Key": "OBUF_T",
+      "Value": "OBUF_T: Obligasjoner Utlån og fordring"
+    },
+    {
+      "Key": "OPSJ_K",
+      "Value": "OPSJ_K: Strategisk Aksje Opsjoner, Kol"
+    },
+    {
+      "Key": "OPSJ_S",
+      "Value": "OPSJ_S: Strategisk Aksje Opsjoner, Sel"
+    },
+    {
+      "Key": "PEDL_K",
+      "Value": "PEDL_K: Private equity Direct Lending,"
+    },
+    {
+      "Key": "PEDL_S",
+      "Value": "PEDL_S: Private equity Direct Lending,"
+    },
+    {
+      "Key": "PMNO_K",
+      "Value": "PMNO_K: Pengemarked, Kollektiv"
+    },
+    {
+      "Key": "PMNO_S",
+      "Value": "PMNO_S: Pengemarked, Selskap"
+    },
+    {
+      "Key": "PMNO_T",
+      "Value": "PMNO_T: Pengemarked, Tingskade"
+    },
+    {
+      "Key": "PREQ_K",
+      "Value": "PREQ_K: Private Equity,  Kollektiv"
+    },
+    {
+      "Key": "RRNO_K",
+      "Value": "RRNO_K: Obligasjoner Realrente, Kollek"
+    },
+    {
+      "Key": "STAKF_K",
+      "Value": "STAKF_K: Strategisk Aksje Futures, Koll"
+    },
+    {
+      "Key": "STVD_K",
+      "Value": "STVD_K: Strategisk Valuta Derivater, K"
+    },
+    {
+      "Key": "UTLN_K",
+      "Value": "UTLN_K: Utlån, Kollektiv"
+    },
+    {
+      "Key": "UTLN_S",
+      "Value": "UTLN_S: Utlån, Selskap"
+    },
+    {
+      "Key": "VAKGLI_K",
+      "Value": "VAKGLI_K: Valuta, Aksjer Global Internt,"
+    },
+    {
+      "Key": "VAKTIVE_K",
+      "Value": "VAKTIVE_K: Valuta, Aksjer Aktive Eksternt"
+    },
+    {
+      "Key": "VAKTIVE_S",
+      "Value": "VAKTIVE_S: Valuta, Aksjer Aktive Eksternt"
+    },
+    {
+      "Key": "VEIDM_K",
+      "Value": "VEIDM_K: Valuta Eiendom Belånt Eksternt"
+    },
+    {
+      "Key": "VEIDM_S",
+      "Value": "VEIDM_S: Valuta, Eiendom, Selskap"
+    },
+    {
+      "Key": "VEIIN_K",
+      "Value": "VEIIN_K: Valuta, Eiendom internt, Kolle"
+    },
+    {
+      "Key": "VENTURE_K",
+      "Value": "VENTURE_K: Venture kapital, kollektiv"
+    },
+    {
+      "Key": "VHEDG_K",
+      "Value": "VHEDG_K: Valuta, Hedgefund, Kollektiv"
+    },
+    {
+      "Key": "VHYOB_K",
+      "Value": "VHYOB_K: Valuta, High Yield Obligasjone"
+    },
+    {
+      "Key": "VINDEKS_K",
+      "Value": "VINDEKS_K: Valuta, Aksjer Indeks Eksternt"
+    },
+    {
+      "Key": "VINDEKS_S",
+      "Value": "VINDEKS_S: Valuta, Aksjer Indeks Eksternt"
+    },
+    {
+      "Key": "VINFR_K",
+      "Value": "VINFR_K: Valuta, Infrastruktur, Kollekt"
+    },
+    {
+      "Key": "VKOOB_K",
+      "Value": "VKOOB_K: Valuta, Konvertible Obligasjon"
+    },
+    {
+      "Key": "VPEDL_K",
+      "Value": "VPEDL_K: Valuta, Private Equity Direct"
+    },
+    {
+      "Key": "VPEDL_S",
+      "Value": "VPEDL_S: Valuta, Private Equity Direct"
+    },
+    {
+      "Key": "VPREQ_K",
+      "Value": "VPREQ_K: Valuta, Private Equity, Kollek"
+    },
+    {
+      "Key": "XFORD_K",
+      "Value": "XFORD_K: Fordringer, Kollektiv"
+    },
+    {
+      "Key": "XFORD_S",
+      "Value": "XFORD_S: Fordringer, Selskap"
+    },
+    {
+      "Key": "XMV_K",
+      "Value": "XMV_K: Mellomværende, kollektiv"
+    },
+    {
+      "Key": "XMV_S",
+      "Value": "XMV_S: Mellomværende, Selskap"
+    },
+    {
+      "Key": "XPMBK_K",
+      "Value": "XPMBK_K: Pengemarked Bank, Kollektiv"
+    },
+    {
+      "Key": "XPMBK_S",
+      "Value": "XPMBK_S: Pengemarked Bank, Selskap"
+    },
+    {
+      "Key": "XPMBK_T",
+      "Value": "XPMBK_T: Pengemarked Bank, Tingskade"
+    },
+    {
+      "Key": "PEDS_K",
+      "Value": "PEDS_K: Private Equity datterselskap, Kollektiv"
+    },
+    {
+      "Key": "VIGCLO_K",
+      "Value": "VIGCLO_K: Valuta, Obligasjoner Eksternt"
+    },
+    {
+      "Key": "IGCLO_K",
+      "Value": "IGCLO_K: Obligasjoner Eksternt CLO, Kol"
+    },
+    {
+      "Key": "VPEDS_K",
+      "Value": "VPEDS_K: Valuta Private Equity datterselskap, koll"
+    }
+]

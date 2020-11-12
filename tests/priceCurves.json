@@ -1,0 +1,506 @@
+[
+    {
+      "Key": "NOK6MZeroCurve",
+      "Value": "NOK6MZeroCurve"
+    },
+    {
+      "Key": "NOK3MZeroCurve",
+      "Value": "NOK3MZeroCurve"
+    },
+    {
+      "Key": "NOK_6MZC_ENTRA",
+      "Value": "Pricing Curve for ENTRA"
+    },
+    {
+      "Key": "NOK_6MZC_K1",
+      "Value": "Pricing curve for Kraft 1"
+    },
+    {
+      "Key": "EUR3MZeroCurve",
+      "Value": "EUR3MZeroCurve"
+    },
+    {
+      "Key": "EUR6MZeroCurve",
+      "Value": "EUR6MZeroCurve"
+    },
+    {
+      "Key": "NOK_3MZC_K1",
+      "Value": "NOK_3MZC_K1"
+    },
+    {
+      "Key": "NOK3M_ADJ",
+      "Value": "NOK3M_ADJ"
+    },
+    {
+      "Key": "NOK_3MZC_ENTRA",
+      "Value": "NOK_3MZC_ENTRA"
+    },
+    {
+      "Key": "NOK_6MZC_BankSub1",
+      "Value": "NOK_6MZC_BankSub1"
+    },
+    {
+      "Key": "NOK_6MZC_BankSub",
+      "Value": "NOK_6MZC_BankSub"
+    },
+    {
+      "Key": "NOK_6MZC_Statnett",
+      "Value": "NOK_6MZC_Statnett"
+    },
+    {
+      "Key": "NOK_6MZC_Bank1",
+      "Value": "NOK_6MZC_Bank1"
+    },
+    {
+      "Key": "NOK_6MZC_OMF_B2",
+      "Value": "NOK_6MZC_OMF_B2"
+    },
+    {
+      "Key": "NO_6MZC_EIKA",
+      "Value": "NO_6MZC_EIKA"
+    },
+    {
+      "Key": "TEST_CURVE_IMPORTED",
+      "Value": "TEST_CURVE_IMPORTED"
+    },
+    {
+      "Key": "NO_6MZC_HSTEP2",
+      "Value": "NO_6MZC_HSTEP2"
+    },
+    {
+      "Key": "NO_6MZC_B1",
+      "Value": "NO_6MZC_B1"
+    },
+    {
+      "Key": "NO_6MZC_B2",
+      "Value": "NO_6MZC_B2"
+    },
+    {
+      "Key": "NO_6MZC_B3",
+      "Value": "NO_6MZC_B3"
+    },
+    {
+      "Key": "NO_6MZC_B5",
+      "Value": "NO_6MZC_B5"
+    },
+    {
+      "Key": "NO_6MZC_OMFB2",
+      "Value": "NO_6MZC_OMFB2"
+    },
+    {
+      "Key": "NO_6MZC_KLPKK_COV",
+      "Value": "NO_6MZC_KLPKK_COV"
+    },
+    {
+      "Key": "NO_6MZC_OMFB6",
+      "Value": "NO_6MZC_OMFB6"
+    },
+    {
+      "Key": "NO_6MZC_ENTRA",
+      "Value": "NO_6MZC_ENTRA"
+    },
+    {
+      "Key": "NO_6MZC_RHEM",
+      "Value": "NO_6MZC_RHEM"
+    },
+    {
+      "Key": "NO_6MZC_VASA",
+      "Value": "NO_6MZC_VASA"
+    },
+    {
+      "Key": "NO_6MZC_EIB",
+      "Value": "NO_6MZC_EIB"
+    },
+    {
+      "Key": "NO_6MZC_APMM",
+      "Value": "NO_6MZC_APMM"
+    },
+    {
+      "Key": "NO_6MZC_AVINOR",
+      "Value": "NO_6MZC_AVINOR"
+    },
+    {
+      "Key": "NO_6MZC_CITYT",
+      "Value": "NO_6MZC_CITYT"
+    },
+    {
+      "Key": "NO_6MZC_KOG",
+      "Value": "NO_6MZC_KOG"
+    },
+    {
+      "Key": "NO_6MZC_NORG",
+      "Value": "NO_6MZC_NORG"
+    },
+    {
+      "Key": "NO_6MZC_NORTOG",
+      "Value": "NO_6MZC_NORTOG"
+    },
+    {
+      "Key": "NO_6MZC_VARD",
+      "Value": "NO_6MZC_VARD"
+    },
+    {
+      "Key": "NO_6MZC_MOLLG",
+      "Value": "NO_6MZC_MOLLG"
+    },
+    {
+      "Key": "NO_6MZC_YAR",
+      "Value": "NO_6MZC_YAR"
+    },
+    {
+      "Key": "NO_6MZC_ORK",
+      "Value": "NO_6MZC_ORK"
+    },
+    {
+      "Key": "NO_6MZC_FERDE",
+      "Value": "NO_6MZC_FERDE"
+    },
+    {
+      "Key": "NO_6MZC_KOMB",
+      "Value": "NO_6MZC_KOMB"
+    },
+    {
+      "Key": "NO_6MZC_KO1",
+      "Value": "NO_6MZC_KO1"
+    },
+    {
+      "Key": "NO_6MZC_KO2",
+      "Value": "NO_6MZC_KO2"
+    },
+    {
+      "Key": "NO_6MZC_K1",
+      "Value": "NO_6MZC_K1"
+    },
+    {
+      "Key": "NO_6MZC_K2",
+      "Value": "NO_6MZC_K2"
+    },
+    {
+      "Key": "NO_6MZC_K3",
+      "Value": "NO_6MZC_K3"
+    },
+    {
+      "Key": "NO_6MZC_OMFB3",
+      "Value": "NO_6MZC_OMFB3"
+    },
+    {
+      "Key": "NO_6MZC_SNP_Nordea",
+      "Value": "NO_6MZC_SNP_Nordea"
+    },
+    {
+      "Key": "NO_6MZC_SNP_Danske",
+      "Value": "NO_6MZC_SNP_Danske"
+    },
+    {
+      "Key": "NO_6MZC_STANE",
+      "Value": "NO_6MZC_STANE"
+    },
+    {
+      "Key": "NO_6MZC_A2",
+      "Value": "NO_6MZC_A2"
+    },
+    {
+      "Key": "NO_6MZC_A5",
+      "Value": "NO_6MZC_A5"
+    },
+    {
+      "Key": "NO_6MZC_A8",
+      "Value": "NO_6MZC_A8"
+    },
+    {
+      "Key": "NO_6MZC_OMFN1",
+      "Value": "NO_6MZC_OMFN1"
+    },
+    {
+      "Key": "NO_6MZC_AKER",
+      "Value": "NO_6MZC_AKER"
+    },
+    {
+      "Key": "NO_6MZC_WALWIL",
+      "Value": "NO_6MZC_WALWIL"
+    },
+    {
+      "Key": "NO_6MZC_K4",
+      "Value": "NO_6MZC_K4"
+    },
+    {
+      "Key": "NO_6MZC_OMFB4",
+      "Value": "NO_6MZC_OMFB4"
+    },
+    {
+      "Key": "NO_6MZC_SANC",
+      "Value": "NO_6MZC_SANC"
+    },
+    {
+      "Key": "CPICurve",
+      "Value": "CPICurve"
+    },
+    {
+      "Key": "EU_6MZC_OMFB2",
+      "Value": "EU_6MZC_OMFB2"
+    },
+    {
+      "Key": "EU_3MZC_OMFB2",
+      "Value": "EU_3MZC_OMFB2"
+    },
+    {
+      "Key": "EU_3MZC_B3",
+      "Value": "EU_3MZC_B3"
+    },
+    {
+      "Key": "EU_3MZC_AVINOR",
+      "Value": "EU_3MZC_AVINOR"
+    },
+    {
+      "Key": "EU_3MZC_NHY",
+      "Value": "EU_3MZC_NHY"
+    },
+    {
+      "Key": "EU_3MZC_B6",
+      "Value": "EU_3MZC_B6"
+    },
+    {
+      "Key": "EU_3MZC_OMFB6",
+      "Value": "EU_3MZC_OMFB6"
+    },
+    {
+      "Key": "US_3M_SwapCurve",
+      "Value": "US_3M_SwapCurve"
+    },
+    {
+      "Key": "EUR_3MZC_NOEU_ADJ",
+      "Value": "EUR 3M Justert for FX Basis"
+    },
+    {
+      "Key": "EUR_6MZC_NOEU_ADJ",
+      "Value": "EUR 6M Justert for FX Basis"
+    },
+    {
+      "Key": "USD_3MZC_NOUS_ADJ",
+      "Value": "US 3M justert for FX Basis"
+    },
+    {
+      "Key": "EU_6MZC_K1",
+      "Value": "EU_6MZC_K1"
+    },
+    {
+      "Key": "EU_6MZC_A2",
+      "Value": "EU_6MZC_A2"
+    },
+    {
+      "Key": "EU_3MZC_A2",
+      "Value": "EU_3MZC_A2"
+    },
+    {
+      "Key": "EU_3MZC_K1",
+      "Value": "EU_3MZC_K1"
+    },
+    {
+      "Key": "NOUS_FX_FWD",
+      "Value": "NOUS_FX_FWD"
+    },
+    {
+      "Key": "US_FX_FWD",
+      "Value": "US_FX_FWD"
+    },
+    {
+      "Key": "NOK_3MZC_NOEU_ADJ",
+      "Value": "NOK 3M justert for FX basis"
+    },
+    {
+      "Key": "NOK_6MZC_NOEU_ADJ",
+      "Value": "NOK 6M Justert for FX basis"
+    },
+    {
+      "Key": "NOK_3MZC_NOUS_ADJ",
+      "Value": "NO 3M justert for US FX basis"
+    },
+    {
+      "Key": "NOK_6MZC_NOUS_ADJ",
+      "Value": "NO 6M justert for US FX basis"
+    },
+    {
+      "Key": "NO_6MZC_B4",
+      "Value": "NO_6MZC_B4"
+    },
+    {
+      "Key": "EU_3MZC_B1",
+      "Value": "EU_3MZC_B1"
+    },
+    {
+      "Key": "NO_6MZC_NHY",
+      "Value": "NO_6MZC_NHY"
+    },
+    {
+      "Key": "US_6MZC_YAR",
+      "Value": "US_6MZC_YAR"
+    },
+    {
+      "Key": "NO_6MZC_A7",
+      "Value": "NO_6MZC_A7"
+    },
+    {
+      "Key": "NO_6MZC_VW",
+      "Value": "NO_6MZC_VW"
+    },
+    {
+      "Key": "EU_6MZC_AVINOR",
+      "Value": "EU_6MZC_AVINOR"
+    },
+    {
+      "Key": "EU_6MZC_B1",
+      "Value": "EU_6MZC_B1"
+    },
+    {
+      "Key": "EU_6MZC_B3",
+      "Value": "EU_6MZC_B3"
+    },
+    {
+      "Key": "EU_6MZC_B6",
+      "Value": "EU_6MZC_B6"
+    },
+    {
+      "Key": "EU_6MZC_NHY",
+      "Value": "EU_6MZC_NHY"
+    },
+    {
+      "Key": "EU_6MZC_OMFB6",
+      "Value": "EU_6MZC_OMFB6"
+    },
+    {
+      "Key": "EU_3MZC_B2",
+      "Value": "EU_3MZC_B2"
+    },
+    {
+      "Key": "NO_6MZC_KFW",
+      "Value": "NO_6MZC_KFW"
+    },
+    {
+      "Key": "US_6M_Swapcurve",
+      "Value": "US_6M_Swapcurve"
+    },
+    {
+      "Key": "NO_Manuel_Stat",
+      "Value": "NO_Manuel_Stat"
+    },
+    {
+      "Key": "NO_M_Eiend_pant1",
+      "Value": "NO_Manuel_Eiend_pant1"
+    },
+    {
+      "Key": "NO_M_Eiend_Pant2",
+      "Value": "NO_Manuel_Eiend_Pant2"
+    },
+    {
+      "Key": "NO_M_Eiend_Pant3",
+      "Value": "NO_Manuel_Eiend_Pant3"
+    },
+    {
+      "Key": "NO_M_Bank_sub_KOMB",
+      "Value": "NO_Manuel_Bank_sub_KOMB"
+    },
+    {
+      "Key": "NO_M_Forsikr_sub_T1",
+      "Value": "NO_Manuel_Forsikr_sub_T1"
+    },
+    {
+      "Key": "NO_M_Ind_CLEMENS",
+      "Value": "NO_Manuel_Ind_CLEMENS"
+    },
+    {
+      "Key": "NO_Manuel_Ind_ACT",
+      "Value": "NO_Manuel_Ind_ACT"
+    },
+    {
+      "Key": "NO_Manuel_Rabobank",
+      "Value": "NO_Manuel_Rabobank"
+    },
+    {
+      "Key": "NO_Manuel_KOM0",
+      "Value": "NO_Manuel_KOM0"
+    },
+    {
+      "Key": "NO_Manuel_KOM2",
+      "Value": "NO_Manuel_KOM2"
+    },
+    {
+      "Key": "GBPNOK_FWD_PRICE_PC",
+      "Value": "USDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "DKKNOK_FWD_PRICE_PC",
+      "Value": "DKKNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "SEKNOK_FWD_PRICE_PC",
+      "Value": "SEKNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "AUDNOK_FWD_PRICE_PC",
+      "Value": "AUDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "CADNOK_FWD_PRICE_PC",
+      "Value": "CADNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "CHFNOK_FWD_PRICE_PC",
+      "Value": "CHFNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "EURNOK_FWD_PRICE_PC",
+      "Value": "EURNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "HKDNOK_FWD_PRICE_PC",
+      "Value": "HKDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "NOKJPY_FWD_PRICE_PC",
+      "Value": "NOKJPY_FWD_PRICE_PC"
+    },
+    {
+      "Key": "NOKRUB_FWD_PRICE_PC",
+      "Value": "NOKRUB_FWD_PRICE_PC"
+    },
+    {
+      "Key": "NZDNOK_FWD_PRICE_PC",
+      "Value": "NZDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "SGDNOK_FWD_PRICE_PC",
+      "Value": "SGDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "EU_M_Forsikr_Sub_T1",
+      "Value": "EU_M_Forsikr_Sub_T1"
+    },
+    {
+      "Key": "EU_Manuel_Stat",
+      "Value": "EU_Manuel_Stat"
+    },
+    {
+      "Key": "NO_M_Bank_Holdco",
+      "Value": "NO_M_Bank_Holdco"
+    },
+    {
+      "Key": "EU_3M_0VEKT",
+      "Value": "EU_3M_0VEKT"
+    },
+    {
+      "Key": "USDNOK_FWD_PRICE_PC",
+      "Value": "USDNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "NOK_6MZC_OTE_S",
+      "Value": "Pricing curve for Olav Thon Eiendom Secured"
+    },
+    {
+      "Key": "RUBNOK_FWD_PRICE_PC",
+      "Value": "RUBNOK_FWD_PRICE_PC"
+    },
+    {
+      "Key": "JPYNOK_FWD_PRICE_PC",
+      "Value": "JPYNOK_FWD_PRICE_PC"
+    }
+]
