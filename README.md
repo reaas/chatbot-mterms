@@ -1,7 +1,7 @@
 # Chatbot mTerms - NTNU - Microsoft Teams App
 
 ## Pre-requisits
-You need an Azure subscruption to run the application. Bot a ResourceGroup and a BotRegistrationChannel needs to be set up. You can find a guide [here](https://docs.microsoft.com/en-gb/learn/modules/msteams-messaging-extensions/3-exercise-action-commands) (follow the steps under _Register a new bot in Microsoft Azure_)
+You need an Azure subscription to run the application. Both a ResourceGroup and a BotRegistrationChannel needs to be set up. You can find a guide [here](https://docs.microsoft.com/en-gb/learn/modules/msteams-messaging-extensions/3-exercise-action-commands) (follow the steps under _Register a new bot in Microsoft Azure_)
 
 **Make sure you save the _appID_ and _appPassword_ from this guide**
 
@@ -20,10 +20,10 @@ npm install -g gulp-cli ngrok
 
 gulp is a JavaScript framework for streamlining the build process of front-end development projects.
 
-ngrok is a free DNS-tunnel serivce that exposes the application run on your computer to Azure.
+ngrok is a free DNS-tunnel service that exposes the application run on your computer to Azure.
 
 ## Building the app
-Make sure you clone this repository to your local computer by runnning:
+Make sure you clone this repository to your local computer by running:
 ```bash
 git clone https://github.com/reaas/chatbot-mterms.git
 ```
@@ -54,4 +54,4 @@ Copy this URL, and paste it in the `Messaging endpoint` field under `Bot Channel
 
 Now you can either test the bot in the webchat in Azure, or upload the `package/chatbot-mterms.zip` to your own Microsoft Teams installation.
 
-**gulp provides the developer with hot realoding of the app. When changes are made, the bot is recompiled on the same URL as earlier, so there is no need to serve the app again.** Each time `gulp ngrok-serve` is run, the URL has to be changed.
+**gulp provides the developer with hot reloading of the app. When changes are made, the bot is recompiled on the same URL as earlier, so there is no need to serve the app again.** Each time `gulp ngrok-serve` is run, the URL has to be changed.
