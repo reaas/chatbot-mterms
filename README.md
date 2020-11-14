@@ -23,7 +23,7 @@ gulp is a JavaScript framework for streamlining the build process of front-end d
 ngrok is a free DNS-tunnel serivce that exposes the application run on your computer to Azure.
 
 ## Building the app
-Make sure you have clones this repository to your local computer by runnning:
+Make sure you clone this repository to your local computer by runnning:
 ```bash
 git clone https://github.com/reaas/chatbot-mterms.git
 ```
